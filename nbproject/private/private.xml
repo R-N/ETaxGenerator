@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/MojoMacW7/Documents/NetBeansProjects/ETaxGenerator/src/etaxgenerator/util/Util.java</file>
+            <file>file:/C:/Users/MojoMacW7/Documents/NetBeansProjects/ETaxGenerator/src/etaxgenerator/util/Database.java</file>
+            <file>file:/C:/Users/MojoMacW7/Documents/NetBeansProjects/ETaxGenerator/src/etaxgenerator/util/Config.java</file>
+            <file>file:/C:/Users/MojoMacW7/Documents/NetBeansProjects/ETaxGenerator/src/etaxgenerator/GUI.java</file>
+            <file>file:/C:/Users/MojoMacW7/Documents/NetBeansProjects/ETaxGenerator/src/etaxgenerator/main.java</file>
+            <file>file:/C:/Users/MojoMacW7/Documents/NetBeansProjects/ETaxGenerator/src/etaxgenerator/invoice/in/export/Builder.java</file>
+            <file>file:/C:/Users/MojoMacW7/Documents/NetBeansProjects/ETaxGenerator/src/etaxgenerator/invoice/out/export/Builder.java</file>
+            <file>file:/C:/Users/MojoMacW7/Documents/NetBeansProjects/ETaxGenerator/src/etaxgenerator/counterparty/importer/Reader.java</file>
+            <file>file:/C:/Users/MojoMacW7/Documents/NetBeansProjects/ETaxGenerator/src/etaxgenerator/counterparty/create/GUI.java</file>
+            <file>file:/C:/Users/MojoMacW7/Documents/NetBeansProjects/ETaxGenerator/src/etaxgenerator/invoice/out/export/FormReader.java</file>
+            <file>file:/C:/Users/MojoMacW7/Documents/NetBeansProjects/ETaxGenerator/src/etaxgenerator/counterparty/Parser.java</file>
+            <file>file:/C:/Users/MojoMacW7/Documents/NetBeansProjects/ETaxGenerator/src/etaxgenerator/invoice/in/export/GUI.java</file>
+            <file>file:/C:/Users/MojoMacW7/Documents/NetBeansProjects/ETaxGenerator/src/etaxgenerator/counterparty/Database.java</file>
+            <file>file:/C:/Users/MojoMacW7/Documents/NetBeansProjects/ETaxGenerator/src/etaxgenerator/util/ExcelAdapter.java</file>
+            <file>file:/C:/Users/MojoMacW7/Documents/NetBeansProjects/ETaxGenerator/src/etaxgenerator/invoice/in/Invoice.java</file>
+            <file>file:/C:/Users/MojoMacW7/Documents/NetBeansProjects/ETaxGenerator/src/etaxgenerator/invoice/out/export/GUI.java</file>
+            <file>file:/C:/Users/MojoMacW7/Documents/NetBeansProjects/ETaxGenerator/src/etaxgenerator/invoice/in/export/PasteParser.java</file>
+            <file>file:/C:/Users/MojoMacW7/Documents/NetBeansProjects/ETaxGenerator/src/etaxgenerator/invoice/out/export/PasteParser.java</file>
+            <file>file:/C:/Users/MojoMacW7/Documents/NetBeansProjects/ETaxGenerator/src/etaxgenerator/invoice/out/Invoice.java</file>
+            <file>file:/C:/Users/MojoMacW7/Documents/NetBeansProjects/ETaxGenerator/src/etaxgenerator/invoice/out/Item.java</file>
+            <file>file:/C:/Users/MojoMacW7/Documents/NetBeansProjects/ETaxGenerator/src/etaxgenerator/counterparty/create/PasteParser.java</file>
+            <file>file:/C:/Users/MojoMacW7/Documents/NetBeansProjects/ETaxGenerator/src/etaxgenerator/counterparty/create/Builder.java</file>
+            <file>file:/C:/Users/MojoMacW7/Documents/NetBeansProjects/ETaxGenerator/src/etaxgenerator/counterparty/Counterparty.java</file>
+        </group>
+    </open-files>
+</project-private>
