@@ -69,373 +69,62 @@ public class GUI extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel18 = new javax.swing.JPanel();
+        deleteNameButton = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        npwpField = new javax.swing.JTextField();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        nameField = new javax.swing.JTextField();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        addressField = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
+        npwpField = new javax.swing.JTextField();
+        findNPWPButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
+        nameField = new javax.swing.JTextField();
+        findNameButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        addressField = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         blockField = new javax.swing.JTextField();
-        jPanel7 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         noField = new javax.swing.JTextField();
-        jPanel8 = new javax.swing.JPanel();
-        jPanel9 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         rtField = new javax.swing.JTextField();
-        jPanel10 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         rwField = new javax.swing.JTextField();
-        jPanel11 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         kelurahanField = new javax.swing.JTextField();
-        jPanel12 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         kecamatanField = new javax.swing.JTextField();
-        jPanel13 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         cityField = new javax.swing.JTextField();
-        jPanel14 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         provinceField = new javax.swing.JTextField();
-        jPanel15 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         zipCodeField = new javax.swing.JTextField();
-        jPanel16 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         telephoneField = new javax.swing.JTextField();
-        jPanel20 = new javax.swing.JPanel();
+        jSeparator4 = new javax.swing.JSeparator();
         jLabel15 = new javax.swing.JLabel();
-        parseButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         pasteField = new javax.swing.JTextArea();
-        jPanel19 = new javax.swing.JPanel();
+        jPanel23 = new javax.swing.JPanel();
+        parseButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jPanel22 = new javax.swing.JPanel();
         deleteNPWPButton = new javax.swing.JButton();
-        deleteNameButton = new javax.swing.JButton();
-        findNameButton = new javax.swing.JButton();
-        findNPWPButton = new javax.swing.JButton();
+        clearFormButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
         jPanel17 = new javax.swing.JPanel();
-        queueCountLabel = new java.awt.Label();
+        queueLabel = new javax.swing.JLabel();
+        queueCountLabel = new javax.swing.JLabel();
+        jPanel21 = new javax.swing.JPanel();
         clearQueueButton = new javax.swing.JButton();
         delPrevButton = new javax.swing.JButton();
-        clearFormButton = new javax.swing.JButton();
         addButton = new javax.swing.JButton();
         generateButton = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(290, 400));
-        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.PAGE_AXIS));
-
-        jPanel18.setLayout(new javax.swing.BoxLayout(jPanel18, javax.swing.BoxLayout.LINE_AXIS));
-
-        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("Lawan Transaksi");
-        jLabel14.setToolTipText("");
-        jPanel18.add(jLabel14);
-
-        getContentPane().add(jPanel18);
-
-        jPanel1.setMinimumSize(new java.awt.Dimension(132, 300));
-        jPanel1.setPreferredSize(new java.awt.Dimension(260, 300));
-        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
-
-        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.X_AXIS));
-
-        jLabel1.setText("NPWP");
-        jLabel1.setMaximumSize(new java.awt.Dimension(60, 14));
-        jLabel1.setMinimumSize(new java.awt.Dimension(60, 14));
-        jLabel1.setPreferredSize(new java.awt.Dimension(60, 14));
-        jPanel2.add(jLabel1);
-
-        npwpField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                npwpFieldActionPerformed(evt);
-            }
-        });
-        jPanel2.add(npwpField);
-
-        jPanel1.add(jPanel2);
-
-        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.X_AXIS));
-
-        jLabel2.setText("Nama");
-        jLabel2.setMaximumSize(new java.awt.Dimension(60, 14));
-        jLabel2.setMinimumSize(new java.awt.Dimension(60, 14));
-        jLabel2.setPreferredSize(new java.awt.Dimension(60, 14));
-        jPanel3.add(jLabel2);
-
-        nameField.setPreferredSize(new java.awt.Dimension(200, 20));
-        nameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameFieldActionPerformed(evt);
-            }
-        });
-        jPanel3.add(nameField);
-
-        jPanel1.add(jPanel3);
-
-        jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.X_AXIS));
-
-        jLabel3.setText("Alamat");
-        jLabel3.setMaximumSize(new java.awt.Dimension(60, 14));
-        jLabel3.setMinimumSize(new java.awt.Dimension(60, 14));
-        jLabel3.setPreferredSize(new java.awt.Dimension(60, 14));
-        jPanel4.add(jLabel3);
-
-        addressField.setPreferredSize(new java.awt.Dimension(200, 20));
-        addressField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addressFieldActionPerformed(evt);
-            }
-        });
-        jPanel4.add(addressField);
-
-        jPanel1.add(jPanel4);
-
-        jPanel5.setPreferredSize(new java.awt.Dimension(260, 20));
-        jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.X_AXIS));
-
-        jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.X_AXIS));
-
-        jLabel4.setText("Blok");
-        jLabel4.setMaximumSize(new java.awt.Dimension(60, 14));
-        jLabel4.setMinimumSize(new java.awt.Dimension(60, 14));
-        jLabel4.setPreferredSize(new java.awt.Dimension(60, 14));
-        jPanel6.add(jLabel4);
-
-        blockField.setPreferredSize(new java.awt.Dimension(200, 20));
-        blockField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                blockFieldActionPerformed(evt);
-            }
-        });
-        jPanel6.add(blockField);
-
-        jPanel5.add(jPanel6);
-
-        jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.X_AXIS));
-
-        jLabel5.setText("No.");
-        jLabel5.setMaximumSize(new java.awt.Dimension(60, 14));
-        jLabel5.setMinimumSize(new java.awt.Dimension(60, 14));
-        jLabel5.setPreferredSize(new java.awt.Dimension(60, 14));
-        jPanel7.add(jLabel5);
-
-        noField.setPreferredSize(new java.awt.Dimension(200, 20));
-        noField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                noFieldActionPerformed(evt);
-            }
-        });
-        jPanel7.add(noField);
-
-        jPanel5.add(jPanel7);
-
-        jPanel1.add(jPanel5);
-
-        jPanel8.setPreferredSize(new java.awt.Dimension(260, 20));
-        jPanel8.setLayout(new javax.swing.BoxLayout(jPanel8, javax.swing.BoxLayout.X_AXIS));
-
-        jPanel9.setLayout(new javax.swing.BoxLayout(jPanel9, javax.swing.BoxLayout.X_AXIS));
-
-        jLabel6.setText("RT");
-        jLabel6.setMaximumSize(new java.awt.Dimension(60, 14));
-        jLabel6.setMinimumSize(new java.awt.Dimension(60, 14));
-        jLabel6.setPreferredSize(new java.awt.Dimension(60, 14));
-        jPanel9.add(jLabel6);
-
-        rtField.setPreferredSize(new java.awt.Dimension(200, 20));
-        rtField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rtFieldActionPerformed(evt);
-            }
-        });
-        jPanel9.add(rtField);
-
-        jPanel8.add(jPanel9);
-
-        jPanel10.setLayout(new javax.swing.BoxLayout(jPanel10, javax.swing.BoxLayout.X_AXIS));
-
-        jLabel7.setText("RW");
-        jLabel7.setMaximumSize(new java.awt.Dimension(60, 14));
-        jLabel7.setMinimumSize(new java.awt.Dimension(60, 14));
-        jLabel7.setPreferredSize(new java.awt.Dimension(60, 14));
-        jPanel10.add(jLabel7);
-
-        rwField.setPreferredSize(new java.awt.Dimension(200, 20));
-        rwField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rwFieldActionPerformed(evt);
-            }
-        });
-        jPanel10.add(rwField);
-
-        jPanel8.add(jPanel10);
-
-        jPanel1.add(jPanel8);
-
-        jPanel11.setLayout(new javax.swing.BoxLayout(jPanel11, javax.swing.BoxLayout.X_AXIS));
-
-        jLabel8.setText("Kelurahan");
-        jLabel8.setMaximumSize(new java.awt.Dimension(60, 14));
-        jLabel8.setMinimumSize(new java.awt.Dimension(60, 14));
-        jLabel8.setPreferredSize(new java.awt.Dimension(60, 14));
-        jPanel11.add(jLabel8);
-
-        kelurahanField.setPreferredSize(new java.awt.Dimension(200, 20));
-        kelurahanField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                kelurahanFieldActionPerformed(evt);
-            }
-        });
-        jPanel11.add(kelurahanField);
-
-        jPanel1.add(jPanel11);
-
-        jPanel12.setLayout(new javax.swing.BoxLayout(jPanel12, javax.swing.BoxLayout.X_AXIS));
-
-        jLabel9.setText("Kecamatan");
-        jLabel9.setMaximumSize(new java.awt.Dimension(60, 14));
-        jLabel9.setMinimumSize(new java.awt.Dimension(60, 14));
-        jLabel9.setPreferredSize(new java.awt.Dimension(60, 14));
-        jPanel12.add(jLabel9);
-
-        kecamatanField.setPreferredSize(new java.awt.Dimension(200, 20));
-        kecamatanField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                kecamatanFieldActionPerformed(evt);
-            }
-        });
-        jPanel12.add(kecamatanField);
-
-        jPanel1.add(jPanel12);
-
-        jPanel13.setLayout(new javax.swing.BoxLayout(jPanel13, javax.swing.BoxLayout.X_AXIS));
-
-        jLabel10.setText("Kota");
-        jLabel10.setMaximumSize(new java.awt.Dimension(60, 14));
-        jLabel10.setMinimumSize(new java.awt.Dimension(60, 14));
-        jLabel10.setPreferredSize(new java.awt.Dimension(60, 14));
-        jPanel13.add(jLabel10);
-
-        cityField.setPreferredSize(new java.awt.Dimension(200, 20));
-        cityField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cityFieldActionPerformed(evt);
-            }
-        });
-        jPanel13.add(cityField);
-
-        jPanel1.add(jPanel13);
-
-        jPanel14.setLayout(new javax.swing.BoxLayout(jPanel14, javax.swing.BoxLayout.X_AXIS));
-
-        jLabel11.setText("Provinsi");
-        jLabel11.setMaximumSize(new java.awt.Dimension(60, 14));
-        jLabel11.setMinimumSize(new java.awt.Dimension(60, 14));
-        jLabel11.setPreferredSize(new java.awt.Dimension(60, 14));
-        jPanel14.add(jLabel11);
-
-        provinceField.setPreferredSize(new java.awt.Dimension(200, 20));
-        provinceField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                provinceFieldActionPerformed(evt);
-            }
-        });
-        jPanel14.add(provinceField);
-
-        jPanel1.add(jPanel14);
-
-        jPanel15.setLayout(new javax.swing.BoxLayout(jPanel15, javax.swing.BoxLayout.X_AXIS));
-
-        jLabel12.setText("Kode Pos");
-        jLabel12.setMaximumSize(new java.awt.Dimension(60, 14));
-        jLabel12.setMinimumSize(new java.awt.Dimension(60, 14));
-        jLabel12.setPreferredSize(new java.awt.Dimension(60, 14));
-        jPanel15.add(jLabel12);
-
-        zipCodeField.setPreferredSize(new java.awt.Dimension(200, 20));
-        zipCodeField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                zipCodeFieldActionPerformed(evt);
-            }
-        });
-        jPanel15.add(zipCodeField);
-
-        jPanel1.add(jPanel15);
-
-        jPanel16.setLayout(new javax.swing.BoxLayout(jPanel16, javax.swing.BoxLayout.X_AXIS));
-
-        jLabel13.setText("No. Telp");
-        jLabel13.setMaximumSize(new java.awt.Dimension(60, 14));
-        jLabel13.setMinimumSize(new java.awt.Dimension(60, 14));
-        jLabel13.setPreferredSize(new java.awt.Dimension(60, 14));
-        jPanel16.add(jLabel13);
-
-        telephoneField.setPreferredSize(new java.awt.Dimension(200, 20));
-        telephoneField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                telephoneFieldActionPerformed(evt);
-            }
-        });
-        jPanel16.add(telephoneField);
-
-        jPanel1.add(jPanel16);
-
-        getContentPane().add(jPanel1);
-
-        jPanel20.setLayout(new javax.swing.BoxLayout(jPanel20, javax.swing.BoxLayout.LINE_AXIS));
-
-        jLabel15.setText("Paste Excel");
-        jLabel15.setPreferredSize(new java.awt.Dimension(80, 14));
-        jPanel20.add(jLabel15);
-
-        parseButton.setText("Parse");
-        parseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                parseButtonActionPerformed(evt);
-            }
-        });
-        jPanel20.add(parseButton);
-
-        jButton1.setText("Generate");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel20.add(jButton1);
-
-        pasteField.setColumns(20);
-        pasteField.setRows(5);
-        jScrollPane2.setViewportView(pasteField);
-
-        jPanel20.add(jScrollPane2);
-
-        getContentPane().add(jPanel20);
-
-        jPanel19.setLayout(new javax.swing.BoxLayout(jPanel19, javax.swing.BoxLayout.LINE_AXIS));
-
-        deleteNPWPButton.setText("Delete By NPWP");
-        deleteNPWPButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteNPWPButtonActionPerformed(evt);
-            }
-        });
-        jPanel19.add(deleteNPWPButton);
 
         deleteNameButton.setText("Delete By Name");
         deleteNameButton.addActionListener(new java.awt.event.ActionListener() {
@@ -443,54 +132,457 @@ public class GUI extends javax.swing.JFrame {
                 deleteNameButtonActionPerformed(evt);
             }
         });
-        jPanel19.add(deleteNameButton);
 
-        findNameButton.setText("Find By Name");
-        findNameButton.addActionListener(new java.awt.event.ActionListener() {
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("Lawan Transaksi");
+        jLabel14.setToolTipText("");
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Lawan Transaksi - ETaxGenerator");
+        setMinimumSize(new java.awt.Dimension(290, 400));
+        setPreferredSize(new java.awt.Dimension(480, 600));
+        getContentPane().setLayout(new java.awt.GridBagLayout());
+
+        jPanel1.setMinimumSize(new java.awt.Dimension(132, 270));
+        jPanel1.setPreferredSize(new java.awt.Dimension(132, 270));
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+
+        jLabel1.setText("NPWP");
+        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 4;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel1.add(jLabel1, gridBagConstraints);
+
+        jPanel5.setLayout(new java.awt.GridBagLayout());
+
+        npwpField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                findNameButtonActionPerformed(evt);
+                npwpFieldActionPerformed(evt);
             }
         });
-        jPanel19.add(findNameButton);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 4;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel5.add(npwpField, gridBagConstraints);
 
-        findNPWPButton.setText("Find By NPWP");
+        findNPWPButton.setText("Find");
         findNPWPButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 findNPWPButtonActionPerformed(evt);
             }
         });
-        jPanel19.add(findNPWPButton);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel5.add(findNPWPButton, gridBagConstraints);
 
-        saveButton.setText("Save");
-        saveButton.addActionListener(new java.awt.event.ActionListener() {
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        jPanel1.add(jPanel5, gridBagConstraints);
+
+        jLabel2.setText("Nama");
+        jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 4;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel1.add(jLabel2, gridBagConstraints);
+
+        jPanel6.setLayout(new java.awt.GridBagLayout());
+
+        nameField.setPreferredSize(new java.awt.Dimension(200, 20));
+        nameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveButtonActionPerformed(evt);
+                nameFieldActionPerformed(evt);
             }
         });
-        jPanel19.add(saveButton);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 4;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel6.add(nameField, gridBagConstraints);
 
-        getContentPane().add(jPanel19);
-
-        jPanel17.setLayout(new javax.swing.BoxLayout(jPanel17, javax.swing.BoxLayout.LINE_AXIS));
-
-        queueCountLabel.setText("Count: 0");
-        jPanel17.add(queueCountLabel);
-
-        clearQueueButton.setText("Clear Queue");
-        clearQueueButton.addActionListener(new java.awt.event.ActionListener() {
+        findNameButton.setText("Find");
+        findNameButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clearQueueButtonActionPerformed(evt);
+                findNameButtonActionPerformed(evt);
             }
         });
-        jPanel17.add(clearQueueButton);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel6.add(findNameButton, gridBagConstraints);
 
-        delPrevButton.setText("Del Prev");
-        delPrevButton.addActionListener(new java.awt.event.ActionListener() {
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        jPanel1.add(jPanel6, gridBagConstraints);
+
+        jLabel3.setText("Alamat");
+        jLabel3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 4;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel1.add(jLabel3, gridBagConstraints);
+
+        jScrollPane3.setMinimumSize(new java.awt.Dimension(64, 27));
+
+        addressField.setColumns(20);
+        addressField.setLineWrap(true);
+        addressField.setRows(1);
+        addressField.setToolTipText("Paste from excel here");
+        addressField.setMinimumSize(new java.awt.Dimension(64, 27));
+        jScrollPane3.setViewportView(addressField);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel1.add(jScrollPane3, gridBagConstraints);
+
+        jLabel4.setText("Blok");
+        jLabel4.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 4;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel1.add(jLabel4, gridBagConstraints);
+
+        blockField.setPreferredSize(new java.awt.Dimension(200, 20));
+        blockField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                delPrevButtonActionPerformed(evt);
+                blockFieldActionPerformed(evt);
             }
         });
-        jPanel17.add(delPrevButton);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 4;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel1.add(blockField, gridBagConstraints);
+
+        jLabel5.setText("No.");
+        jLabel5.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 4;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel1.add(jLabel5, gridBagConstraints);
+
+        noField.setPreferredSize(new java.awt.Dimension(200, 20));
+        noField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noFieldActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 4;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel1.add(noField, gridBagConstraints);
+
+        jLabel6.setText("RT");
+        jLabel6.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 4;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel1.add(jLabel6, gridBagConstraints);
+
+        rtField.setPreferredSize(new java.awt.Dimension(200, 20));
+        rtField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rtFieldActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 4;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel1.add(rtField, gridBagConstraints);
+
+        jLabel7.setText("RW");
+        jLabel7.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 4;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel1.add(jLabel7, gridBagConstraints);
+
+        rwField.setPreferredSize(new java.awt.Dimension(200, 20));
+        rwField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rwFieldActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 4;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel1.add(rwField, gridBagConstraints);
+
+        jLabel8.setText("Kelurahan");
+        jLabel8.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel8.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 4;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel1.add(jLabel8, gridBagConstraints);
+
+        kelurahanField.setPreferredSize(new java.awt.Dimension(200, 20));
+        kelurahanField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kelurahanFieldActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 4;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel1.add(kelurahanField, gridBagConstraints);
+
+        jLabel9.setText("Kecamatan");
+        jLabel9.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel9.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 4;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel1.add(jLabel9, gridBagConstraints);
+
+        kecamatanField.setPreferredSize(new java.awt.Dimension(200, 20));
+        kecamatanField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kecamatanFieldActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 4;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel1.add(kecamatanField, gridBagConstraints);
+
+        jLabel10.setText("Kota");
+        jLabel10.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel10.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 4;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel1.add(jLabel10, gridBagConstraints);
+
+        cityField.setPreferredSize(new java.awt.Dimension(200, 20));
+        cityField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cityFieldActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 4;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel1.add(cityField, gridBagConstraints);
+
+        jLabel11.setText("Provinsi");
+        jLabel11.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel11.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 4;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel1.add(jLabel11, gridBagConstraints);
+
+        provinceField.setPreferredSize(new java.awt.Dimension(200, 20));
+        provinceField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                provinceFieldActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 4;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel1.add(provinceField, gridBagConstraints);
+
+        jLabel12.setText("Kode Pos");
+        jLabel12.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel12.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 4;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel1.add(jLabel12, gridBagConstraints);
+
+        zipCodeField.setPreferredSize(new java.awt.Dimension(200, 20));
+        zipCodeField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                zipCodeFieldActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 4;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel1.add(zipCodeField, gridBagConstraints);
+
+        jLabel13.setText("No. Telp");
+        jLabel13.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel13.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 4;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel1.add(jLabel13, gridBagConstraints);
+
+        telephoneField.setPreferredSize(new java.awt.Dimension(200, 20));
+        telephoneField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                telephoneFieldActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 4;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel1.add(telephoneField, gridBagConstraints);
+
+        jSeparator4.setMaximumSize(new java.awt.Dimension(32767, 10));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel1.add(jSeparator4, gridBagConstraints);
+
+        jLabel15.setText("Paste Excel");
+        jLabel15.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel15.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel1.add(jLabel15, gridBagConstraints);
+
+        jPanel3.setLayout(new java.awt.GridBagLayout());
+
+        jScrollPane2.setMinimumSize(new java.awt.Dimension(64, 27));
+
+        pasteField.setColumns(20);
+        pasteField.setLineWrap(true);
+        pasteField.setRows(1);
+        pasteField.setToolTipText("Paste from excel here");
+        pasteField.setMinimumSize(new java.awt.Dimension(64, 27));
+        jScrollPane2.setViewportView(pasteField);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel3.add(jScrollPane2, gridBagConstraints);
+
+        jPanel23.setLayout(new java.awt.FlowLayout(1, 4, 4));
+
+        parseButton.setText("Parse");
+        parseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                parseButtonActionPerformed(evt);
+            }
+        });
+        jPanel23.add(parseButton);
+
+        jButton1.setText("Generate");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel23.add(jButton1);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        jPanel3.add(jPanel23, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanel1.add(jPanel3, gridBagConstraints);
+
+        jPanel22.setLayout(new java.awt.FlowLayout(1, 4, 4));
+
+        deleteNPWPButton.setText("Delete By NPWP");
+        deleteNPWPButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteNPWPButtonActionPerformed(evt);
+            }
+        });
+        jPanel22.add(deleteNPWPButton);
 
         clearFormButton.setText("Clear Form");
         clearFormButton.addActionListener(new java.awt.event.ActionListener() {
@@ -498,7 +590,67 @@ public class GUI extends javax.swing.JFrame {
                 clearFormButtonActionPerformed(evt);
             }
         });
-        jPanel17.add(clearFormButton);
+        jPanel22.add(clearFormButton);
+
+        saveButton.setText("Save");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
+        jPanel22.add(saveButton);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        jPanel1.add(jPanel22, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        getContentPane().add(jPanel1, gridBagConstraints);
+
+        jPanel17.setLayout(new java.awt.GridBagLayout());
+
+        queueLabel.setText("Queue");
+        queueLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        queueLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel17.add(queueLabel, gridBagConstraints);
+
+        queueCountLabel.setText("Count: 0");
+        queueCountLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        queueCountLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel17.add(queueCountLabel, gridBagConstraints);
+
+        jPanel21.setLayout(new java.awt.FlowLayout(1, 4, 4));
+
+        clearQueueButton.setText("Clear Queue");
+        clearQueueButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearQueueButtonActionPerformed(evt);
+            }
+        });
+        jPanel21.add(clearQueueButton);
+
+        delPrevButton.setText("Del Prev");
+        delPrevButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delPrevButtonActionPerformed(evt);
+            }
+        });
+        jPanel21.add(delPrevButton);
 
         addButton.setText("Add");
         addButton.addActionListener(new java.awt.event.ActionListener() {
@@ -506,7 +658,7 @@ public class GUI extends javax.swing.JFrame {
                 addButtonActionPerformed(evt);
             }
         });
-        jPanel17.add(addButton);
+        jPanel21.add(addButton);
 
         generateButton.setText("Generate");
         generateButton.addActionListener(new java.awt.event.ActionListener() {
@@ -514,9 +666,19 @@ public class GUI extends javax.swing.JFrame {
                 generateButtonActionPerformed(evt);
             }
         });
-        jPanel17.add(generateButton);
+        jPanel21.add(generateButton);
 
-        getContentPane().add(jPanel17);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        jPanel17.add(jPanel21, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        getContentPane().add(jPanel17, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -528,10 +690,6 @@ public class GUI extends javax.swing.JFrame {
     private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nameFieldActionPerformed
-
-    private void addressFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addressFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addressFieldActionPerformed
 
     private void blockFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockFieldActionPerformed
         // TODO add your handling code here:
@@ -771,7 +929,7 @@ public class GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
-    public javax.swing.JTextField addressField;
+    public javax.swing.JTextArea addressField;
     public javax.swing.JTextField blockField;
     public javax.swing.JTextField cityField;
     private javax.swing.JButton clearFormButton;
@@ -799,26 +957,16 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel19;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
+    private javax.swing.JPanel jPanel22;
+    private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JSeparator jSeparator4;
     public javax.swing.JTextField kecamatanField;
     public javax.swing.JTextField kelurahanField;
     public javax.swing.JTextField nameField;
@@ -827,7 +975,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton parseButton;
     public javax.swing.JTextArea pasteField;
     public javax.swing.JTextField provinceField;
-    private java.awt.Label queueCountLabel;
+    private javax.swing.JLabel queueCountLabel;
+    private javax.swing.JLabel queueLabel;
     public javax.swing.JTextField rtField;
     public javax.swing.JTextField rwField;
     private javax.swing.JButton saveButton;

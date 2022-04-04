@@ -75,9 +75,10 @@ public class GUI extends javax.swing.JFrame {
         }
         int dpp = Util.parseInt(dppField.getText());
         int ppn = Util.parseInt(ppnField.getText());
-        System.out.println("getppn " + Invoice.getPPn(dpp));
+        int ppnCalc = getPPn();
+        System.out.println("getppn " + ppnCalc);
         System.out.println("ppn " + ppn);
-        int diff = Util.abs(Invoice.getPPn(dpp)-ppn);
+        int diff = Util.abs(ppnCalc-ppn);
         if (diff > 1){
             Util.showError("PPn atau DPP salah. Diff=" + diff, "Error");
             return false;
@@ -128,8 +129,16 @@ public class GUI extends javax.swing.JFrame {
         dppField.setText("");
         ppnField.setText("");
     }
-    public void calculate(){
-        ppnField.setText(Util.formatNumber(Invoice.getPPn(Util.parseInt(dppField.getText()))));
+    
+    public int getPPn(){
+        return Invoice.getPPn(
+                Util.parseInt(dppField.getText()),
+                Util.parseDouble(ppnPercentField.getText())
+        );
+    }
+    
+    public void setPPn(){
+        ppnField.setText(Util.formatNumber(getPPn()));
     }
     public GUI() {
         initComponents();
@@ -146,73 +155,88 @@ public class GUI extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
         jPanel7 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         nameField = new javax.swing.JTextField();
         findNameButton = new javax.swing.JButton();
-        jPanel6 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
         npwpField = new javax.swing.JTextField();
         findNPWPButton = new javax.swing.JButton();
-        jPanel8 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         addressField = new javax.swing.JTextArea();
-        jPanel9 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         invoiceNoField = new javax.swing.JTextField();
-        jPanel11 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         dateField = new javax.swing.JTextField();
-        jPanel15 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         periodField = new javax.swing.JTextField();
-        filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         jLabel17 = new javax.swing.JLabel();
         yearField = new javax.swing.JTextField();
-        jPanel14 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         dppField = new javax.swing.JTextField();
-        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         jLabel14 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        ppnPercentField = new javax.swing.JTextField();
         ppnField = new javax.swing.JTextField();
         calculateButton = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        pasteField = new javax.swing.JTextArea();
+        jPanel6 = new javax.swing.JPanel();
         indoCommaCheckBox = new javax.swing.JCheckBox();
         parseButton = new javax.swing.JButton();
         generateExcelButton = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        pasteField = new javax.swing.JTextArea();
+        jPanel8 = new javax.swing.JPanel();
+        clearFormButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        queueCountLabel = new java.awt.Label();
+        jLabel7 = new javax.swing.JLabel();
+        queueCountLabel = new javax.swing.JLabel();
         clearQueueButton = new javax.swing.JButton();
         delPrevButton = new javax.swing.JButton();
-        clearFormButton = new javax.swing.JButton();
         addButton = new javax.swing.JButton();
         generateButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.PAGE_AXIS));
-
-        jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
-
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Faktur Masukan");
-        jPanel4.add(jLabel1);
 
-        getContentPane().add(jPanel4);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Faktur Masukan - ETaxGenerator");
+        setPreferredSize(new java.awt.Dimension(480, 600));
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.LINE_AXIS));
+        jSeparator2.setMaximumSize(new java.awt.Dimension(32767, 10));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        getContentPane().add(jSeparator2, gridBagConstraints);
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jPanel7.setLayout(new java.awt.GridBagLayout());
+
         jLabel4.setText("Nama");
-        jLabel4.setPreferredSize(new java.awt.Dimension(80, 15));
-        jPanel7.add(jLabel4);
-        jPanel7.add(nameField);
+        jLabel4.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel7.add(jLabel4, gridBagConstraints);
+
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel1.add(nameField, gridBagConstraints);
 
         findNameButton.setText("Find");
         findNameButton.addActionListener(new java.awt.event.ActionListener() {
@@ -220,17 +244,34 @@ public class GUI extends javax.swing.JFrame {
                 findNameButtonActionPerformed(evt);
             }
         });
-        jPanel7.add(findNameButton);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel1.add(findNameButton, gridBagConstraints);
 
-        getContentPane().add(jPanel7);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        jPanel7.add(jPanel1, gridBagConstraints);
 
-        jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.LINE_AXIS));
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("NPWP");
-        jLabel3.setPreferredSize(new java.awt.Dimension(80, 15));
-        jPanel6.add(jLabel3);
-        jPanel6.add(npwpField);
+        jLabel3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel7.add(jLabel3, gridBagConstraints);
+
+        jPanel3.setLayout(new java.awt.GridBagLayout());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel3.add(npwpField, gridBagConstraints);
 
         findNPWPButton.setText("Find");
         findNPWPButton.addActionListener(new java.awt.event.ActionListener() {
@@ -238,87 +279,151 @@ public class GUI extends javax.swing.JFrame {
                 findNPWPButtonActionPerformed(evt);
             }
         });
-        jPanel6.add(findNPWPButton);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel3.add(findNPWPButton, gridBagConstraints);
 
-        getContentPane().add(jPanel6);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        jPanel7.add(jPanel3, gridBagConstraints);
 
-        jPanel8.setLayout(new javax.swing.BoxLayout(jPanel8, javax.swing.BoxLayout.LINE_AXIS));
+        jLabel5.setText("Alamat");
+        jLabel5.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel7.add(jLabel5, gridBagConstraints);
+        jLabel5.getAccessibleContext().setAccessibleName("Alamat");
 
-        jLabel5.setText("Alamat Lengkap");
-        jLabel5.setPreferredSize(new java.awt.Dimension(80, 14));
-        jPanel8.add(jLabel5);
+        jScrollPane4.setMinimumSize(new java.awt.Dimension(64, 27));
 
         addressField.setColumns(20);
-        addressField.setRows(5);
+        addressField.setLineWrap(true);
+        addressField.setRows(1);
+        addressField.setMinimumSize(new java.awt.Dimension(64, 27));
         jScrollPane4.setViewportView(addressField);
 
-        jPanel8.add(jScrollPane4);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel7.add(jScrollPane4, gridBagConstraints);
 
-        getContentPane().add(jPanel8);
-
-        jPanel9.setLayout(new javax.swing.BoxLayout(jPanel9, javax.swing.BoxLayout.LINE_AXIS));
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("No. Faktur");
-        jLabel6.setPreferredSize(new java.awt.Dimension(80, 15));
-        jPanel9.add(jLabel6);
-        jPanel9.add(invoiceNoField);
+        jLabel6.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel7.add(jLabel6, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel7.add(invoiceNoField, gridBagConstraints);
 
-        getContentPane().add(jPanel9);
-
-        jPanel11.setLayout(new javax.swing.BoxLayout(jPanel11, javax.swing.BoxLayout.LINE_AXIS));
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel11.setText("Tanggal");
-        jLabel11.setPreferredSize(new java.awt.Dimension(80, 15));
-        jPanel11.add(jLabel11);
+        jLabel11.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel11.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel7.add(jLabel11, gridBagConstraints);
 
         dateField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dateFieldActionPerformed(evt);
             }
         });
-        jPanel11.add(dateField);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel7.add(dateField, gridBagConstraints);
 
-        getContentPane().add(jPanel11);
-
-        jPanel15.setLayout(new javax.swing.BoxLayout(jPanel15, javax.swing.BoxLayout.LINE_AXIS));
-
-        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel16.setText("Masa Pajak:");
-        jLabel16.setPreferredSize(new java.awt.Dimension(80, 15));
-        jPanel15.add(jLabel16);
-        jPanel15.add(periodField);
-        jPanel15.add(filler4);
+        jLabel16.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel16.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel7.add(jLabel16, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel7.add(periodField, gridBagConstraints);
 
-        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel17.setText("Tahun Pajak:");
-        jLabel17.setPreferredSize(new java.awt.Dimension(80, 15));
-        jPanel15.add(jLabel17);
-        jPanel15.add(yearField);
+        jLabel17.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel17.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel7.add(jLabel17, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel7.add(yearField, gridBagConstraints);
 
-        getContentPane().add(jPanel15);
-
-        jPanel14.setLayout(new javax.swing.BoxLayout(jPanel14, javax.swing.BoxLayout.LINE_AXIS));
-
-        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel15.setText("DPP :");
-        jLabel15.setPreferredSize(new java.awt.Dimension(80, 15));
-        jPanel14.add(jLabel15);
+        jLabel15.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel15.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel7.add(jLabel15, gridBagConstraints);
 
         dppField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dppFieldActionPerformed(evt);
             }
         });
-        jPanel14.add(dppField);
-        jPanel14.add(filler3);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel7.add(dppField, gridBagConstraints);
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel14.setText("PPN : ");
-        jLabel14.setPreferredSize(new java.awt.Dimension(80, 15));
-        jPanel14.add(jLabel14);
-        jPanel14.add(ppnField);
+        jLabel14.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel14.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel7.add(jLabel14, gridBagConstraints);
+
+        jPanel4.setLayout(new java.awt.GridBagLayout());
+
+        ppnPercentField.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        ppnPercentField.setText("0.11");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel4.add(ppnPercentField, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel4.add(ppnField, gridBagConstraints);
 
         calculateButton.setText("Calculate");
         calculateButton.addActionListener(new java.awt.event.ActionListener() {
@@ -326,15 +431,43 @@ public class GUI extends javax.swing.JFrame {
                 calculateButtonActionPerformed(evt);
             }
         });
-        jPanel14.add(calculateButton);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel4.add(calculateButton, gridBagConstraints);
 
-        getContentPane().add(jPanel14);
-
-        jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.LINE_AXIS));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        jPanel7.add(jPanel4, gridBagConstraints);
 
         jLabel2.setText("Paste Excel");
-        jLabel2.setPreferredSize(new java.awt.Dimension(80, 14));
-        jPanel5.add(jLabel2);
+        jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel7.add(jLabel2, gridBagConstraints);
+
+        jScrollPane2.setMinimumSize(new java.awt.Dimension(64, 27));
+
+        pasteField.setColumns(20);
+        pasteField.setLineWrap(true);
+        pasteField.setRows(1);
+        pasteField.setMinimumSize(new java.awt.Dimension(64, 27));
+        jScrollPane2.setViewportView(pasteField);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel7.add(jScrollPane2, gridBagConstraints);
+
+        jPanel6.setLayout(new java.awt.FlowLayout(1, 4, 4));
 
         indoCommaCheckBox.setText("Indo Comma");
         indoCommaCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -342,7 +475,7 @@ public class GUI extends javax.swing.JFrame {
                 indoCommaCheckBoxActionPerformed(evt);
             }
         });
-        jPanel5.add(indoCommaCheckBox);
+        jPanel6.add(indoCommaCheckBox);
 
         parseButton.setText("Parse");
         parseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -350,7 +483,7 @@ public class GUI extends javax.swing.JFrame {
                 parseButtonActionPerformed(evt);
             }
         });
-        jPanel5.add(parseButton);
+        jPanel6.add(parseButton);
 
         generateExcelButton.setText("Generate");
         generateExcelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -358,36 +491,14 @@ public class GUI extends javax.swing.JFrame {
                 generateExcelButtonActionPerformed(evt);
             }
         });
-        jPanel5.add(generateExcelButton);
+        jPanel6.add(generateExcelButton);
 
-        pasteField.setColumns(20);
-        pasteField.setRows(5);
-        jScrollPane2.setViewportView(pasteField);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        jPanel7.add(jPanel6, gridBagConstraints);
 
-        jPanel5.add(jScrollPane2);
-
-        getContentPane().add(jPanel5);
-
-        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
-
-        queueCountLabel.setText("Count: 0");
-        jPanel2.add(queueCountLabel);
-
-        clearQueueButton.setText("Clear Queue");
-        clearQueueButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clearQueueButtonActionPerformed(evt);
-            }
-        });
-        jPanel2.add(clearQueueButton);
-
-        delPrevButton.setText("Del Prev");
-        delPrevButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                delPrevButtonActionPerformed(evt);
-            }
-        });
-        jPanel2.add(delPrevButton);
+        jPanel8.setLayout(new java.awt.FlowLayout(1, 4, 4));
 
         clearFormButton.setText("Clear Form");
         clearFormButton.addActionListener(new java.awt.event.ActionListener() {
@@ -395,7 +506,56 @@ public class GUI extends javax.swing.JFrame {
                 clearFormButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(clearFormButton);
+        jPanel8.add(clearFormButton);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        jPanel7.add(jPanel8, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        getContentPane().add(jPanel7, gridBagConstraints);
+
+        jPanel2.setLayout(new java.awt.GridBagLayout());
+
+        jLabel7.setText("Queue");
+        jLabel7.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel2.add(jLabel7, gridBagConstraints);
+
+        queueCountLabel.setText("Count: 0");
+        queueCountLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        queueCountLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel2.add(queueCountLabel, gridBagConstraints);
+
+        clearQueueButton.setText("Clear Queue");
+        clearQueueButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearQueueButtonActionPerformed(evt);
+            }
+        });
+        jPanel2.add(clearQueueButton, new java.awt.GridBagConstraints());
+
+        delPrevButton.setText("Del Prev");
+        delPrevButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delPrevButtonActionPerformed(evt);
+            }
+        });
+        jPanel2.add(delPrevButton, new java.awt.GridBagConstraints());
 
         addButton.setText("Add");
         addButton.addActionListener(new java.awt.event.ActionListener() {
@@ -403,7 +563,7 @@ public class GUI extends javax.swing.JFrame {
                 addButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(addButton);
+        jPanel2.add(addButton, new java.awt.GridBagConstraints());
 
         generateButton.setText("Generate");
         generateButton.addActionListener(new java.awt.event.ActionListener() {
@@ -411,9 +571,14 @@ public class GUI extends javax.swing.JFrame {
                 generateButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(generateButton);
+        jPanel2.add(generateButton, new java.awt.GridBagConstraints());
 
-        getContentPane().add(jPanel2);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        getContentPane().add(jPanel2, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -456,7 +621,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void calculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateButtonActionPerformed
         // TODO add your handling code here:
-        calculate();
+        setPPn();
     }//GEN-LAST:event_calculateButtonActionPerformed
 
     private void clearQueueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearQueueButtonActionPerformed
@@ -499,7 +664,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void dppFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dppFieldActionPerformed
         // TODO add your handling code here:
-        calculate();
+        setPPn();
     }//GEN-LAST:event_dppFieldActionPerformed
 
     private void dateFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateFieldActionPerformed
@@ -565,8 +730,6 @@ public class GUI extends javax.swing.JFrame {
     public javax.swing.JTextField dateField;
     private javax.swing.JButton delPrevButton;
     public javax.swing.JTextField dppField;
-    private javax.swing.Box.Filler filler3;
-    private javax.swing.Box.Filler filler4;
     private javax.swing.JButton findNPWPButton;
     private javax.swing.JButton findNameButton;
     private javax.swing.JButton generateButton;
@@ -584,25 +747,25 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JSeparator jSeparator2;
     public javax.swing.JTextField nameField;
     public javax.swing.JTextField npwpField;
     private javax.swing.JButton parseButton;
     public javax.swing.JTextArea pasteField;
     public javax.swing.JTextField periodField;
     public javax.swing.JTextField ppnField;
-    private java.awt.Label queueCountLabel;
+    private javax.swing.JTextField ppnPercentField;
+    private javax.swing.JLabel queueCountLabel;
     public javax.swing.JTextField yearField;
     // End of variables declaration//GEN-END:variables
 }

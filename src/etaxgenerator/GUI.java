@@ -5,8 +5,14 @@
  */
 package etaxgenerator;
 
+import etaxgenerator.counterparty.Counterparty;
 import etaxgenerator.util.Util;
+import java.util.ArrayList;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import com.formdev.flatlaf.FlatLightLaf;
 
 /**
  *
@@ -29,59 +35,52 @@ public class GUI extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
-        importCounterpartyButton = new javax.swing.JButton();
-        createCounterpartyButton1 = new javax.swing.JButton();
-        jSeparator4 = new javax.swing.JSeparator();
-        jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        importCounterpartyButton = new javax.swing.JButton();
+        createCounterpartyButton = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jSeparator3 = new javax.swing.JSeparator();
+        jPanel1 = new javax.swing.JPanel();
         invoiceOutButton = new javax.swing.JButton();
-        jSeparator5 = new javax.swing.JSeparator();
         jPanel7 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jSeparator6 = new javax.swing.JSeparator();
+        jPanel4 = new javax.swing.JPanel();
         invoiceInButton = new javax.swing.JButton();
-        jSeparator7 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.PAGE_AXIS));
-
-        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
-
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("ETax Generator");
-        jPanel1.add(jLabel1);
 
-        getContentPane().add(jPanel1);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("ETaxGenerator");
+        setBackground(new java.awt.Color(255, 255, 255));
+        getContentPane().setLayout(new java.awt.CardLayout());
 
-        jSeparator1.setMaximumSize(new java.awt.Dimension(32767, 10));
-        getContentPane().add(jSeparator1);
+        jPanel6.setLayout(new java.awt.GridBagLayout());
 
-        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.PAGE_AXIS));
-
-        jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
+        jPanel2.setAlignmentX(0.5F);
+        jPanel2.setLayout(new java.awt.GridBagLayout());
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel2.setText("Lawan Transaksi");
-        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        jPanel4.add(jLabel2);
+        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel2.add(jLabel2, gridBagConstraints);
 
-        jPanel2.add(jPanel4);
-
-        jSeparator2.setMaximumSize(new java.awt.Dimension(32767, 10));
-        jPanel2.add(jSeparator2);
+        jPanel3.setLayout(new java.awt.FlowLayout(1, 4, 0));
 
         importCounterpartyButton.setText("Impor");
         importCounterpartyButton.addActionListener(new java.awt.event.ActionListener() {
@@ -89,35 +88,43 @@ public class GUI extends javax.swing.JFrame {
                 importCounterpartyButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(importCounterpartyButton);
+        jPanel3.add(importCounterpartyButton);
 
-        createCounterpartyButton1.setText("Buat");
-        createCounterpartyButton1.addActionListener(new java.awt.event.ActionListener() {
+        createCounterpartyButton.setText("Buat");
+        createCounterpartyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createCounterpartyButton1ActionPerformed(evt);
+                createCounterpartyButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(createCounterpartyButton1);
+        jPanel3.add(createCounterpartyButton);
 
-        jSeparator4.setMaximumSize(new java.awt.Dimension(32767, 10));
-        jPanel2.add(jSeparator4);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel2.add(jPanel3, gridBagConstraints);
 
-        getContentPane().add(jPanel2);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel6.add(jPanel2, gridBagConstraints);
 
-        jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.PAGE_AXIS));
-
-        jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.LINE_AXIS));
+        jPanel5.setLayout(new java.awt.GridBagLayout());
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel3.setText("PPn Keluaran");
-        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        jPanel6.add(jLabel3);
+        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel5.add(jLabel3, gridBagConstraints);
 
-        jPanel5.add(jPanel6);
-
-        jSeparator3.setMaximumSize(new java.awt.Dimension(32767, 10));
-        jPanel5.add(jSeparator3);
+        jPanel1.setLayout(new java.awt.FlowLayout(1, 4, 0));
 
         invoiceOutButton.setText("Buat");
         invoiceOutButton.addActionListener(new java.awt.event.ActionListener() {
@@ -125,27 +132,30 @@ public class GUI extends javax.swing.JFrame {
                 invoiceOutButtonActionPerformed(evt);
             }
         });
-        jPanel5.add(invoiceOutButton);
+        jPanel1.add(invoiceOutButton);
 
-        jSeparator5.setMaximumSize(new java.awt.Dimension(32767, 10));
-        jPanel5.add(jSeparator5);
+        jPanel5.add(jPanel1, new java.awt.GridBagConstraints());
 
-        getContentPane().add(jPanel5);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel6.add(jPanel5, gridBagConstraints);
 
-        jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.PAGE_AXIS));
-
-        jPanel8.setLayout(new javax.swing.BoxLayout(jPanel8, javax.swing.BoxLayout.LINE_AXIS));
+        jPanel7.setLayout(new java.awt.GridBagLayout());
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel4.setText("PPn Masukan");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        jPanel8.add(jLabel4);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel7.add(jLabel4, gridBagConstraints);
 
-        jPanel7.add(jPanel8);
-
-        jSeparator6.setMaximumSize(new java.awt.Dimension(32767, 10));
-        jPanel7.add(jSeparator6);
+        jPanel4.setLayout(new java.awt.FlowLayout(1, 4, 0));
 
         invoiceInButton.setText("Buat");
         invoiceInButton.addActionListener(new java.awt.event.ActionListener() {
@@ -153,49 +163,64 @@ public class GUI extends javax.swing.JFrame {
                 invoiceInButtonActionPerformed(evt);
             }
         });
-        jPanel7.add(invoiceInButton);
+        jPanel4.add(invoiceInButton);
 
-        jSeparator7.setMaximumSize(new java.awt.Dimension(32767, 10));
-        jPanel7.add(jSeparator7);
+        jPanel7.add(jPanel4, new java.awt.GridBagConstraints());
 
-        getContentPane().add(jPanel7);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel6.add(jPanel7, gridBagConstraints);
+
+        getContentPane().add(jPanel6, "card2");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void importCounterpartyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importCounterpartyButtonActionPerformed
         // TODO add your handling code here:
-        int in = etaxgenerator.counterparty.Database.getInstance().insertOrUpdate(etaxgenerator.counterparty.importer.Reader.parse());
+        ArrayList<Counterparty> parsed = etaxgenerator.counterparty.importer.Reader.parse();
+        if (parsed == null)
+            return;
+        int in = etaxgenerator.counterparty.Database.getInstance().insertOrUpdate(parsed);
         Util.showMessage(String.format("Imported %d counterparties", in), "Success");
     }//GEN-LAST:event_importCounterpartyButtonActionPerformed
 
     private void invoiceOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invoiceOutButtonActionPerformed
         // TODO add your handling code here:
+        GUI parent = this;
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 JFrame frame = new etaxgenerator.invoice.out.export.GUI();
+                frame.setLocationRelativeTo(parent);
                 frame.setVisible(true);
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             }
         });
     }//GEN-LAST:event_invoiceOutButtonActionPerformed
 
-    private void createCounterpartyButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createCounterpartyButton1ActionPerformed
+    private void createCounterpartyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createCounterpartyButtonActionPerformed
         // TODO add your handling code here:
+        GUI parent = this;
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 JFrame frame = new etaxgenerator.counterparty.create.GUI();
+                frame.setLocationRelativeTo(parent);
                 frame.setVisible(true);
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             }
         });
-    }//GEN-LAST:event_createCounterpartyButton1ActionPerformed
+    }//GEN-LAST:event_createCounterpartyButtonActionPerformed
 
     private void invoiceInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invoiceInButtonActionPerformed
         // TODO add your handling code here:
+        GUI parent = this;
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 JFrame frame = new etaxgenerator.invoice.in.export.GUI();
+                frame.setLocationRelativeTo(parent);
                 frame.setVisible(true);
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             }
@@ -211,9 +236,20 @@ public class GUI extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+        FlatLightLaf.setup();
+        try {
+            JDialog.setDefaultLookAndFeelDecorated(true);
+            //JFrame.setDefaultLookAndFeelDecorated(false);
+            //UIManager.setLookAndFeel(new MaterialLookAndFeel(new MaterialLiteTheme()));
+            UIManager.setLookAndFeel( new FlatLightLaf() );
+        }
+        catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace ();
+        }
+        /*
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("material-lite".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -227,18 +263,21 @@ public class GUI extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        */
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUI().setVisible(true);
+                GUI frame = new GUI();
+                Util.centerWindow(frame);
+                frame.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton createCounterpartyButton1;
+    private javax.swing.JButton createCounterpartyButton;
     private javax.swing.JButton importCounterpartyButton;
     private javax.swing.JButton invoiceInButton;
     private javax.swing.JButton invoiceOutButton;
@@ -248,17 +287,10 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSeparator jSeparator7;
     // End of variables declaration//GEN-END:variables
 }

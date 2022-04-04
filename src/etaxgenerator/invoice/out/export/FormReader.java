@@ -40,6 +40,7 @@ public class FormReader {
         if(dl > 1) inv.month = Util.parseInt(date1[1]);
         if(dl > 2) inv.year = Util.parseInt(date1[2]);
         inv.dp = Util.parseDouble(form.dpField.getText().trim(), indoComma);
+        inv.ppnPercent = Util.parseDouble(form.ppnPercentField.getText().trim());
         
         int rowCount = form.itemTable.getRowCount();
         Item prev = null;
@@ -60,7 +61,7 @@ public class FormReader {
         if(qty <= 0){
             if(name == null || name.isEmpty()){
                 
-            }else{
+            }else if (prev != null){
                 prev.name = prev.name + "; " + name;
             }
             return null;

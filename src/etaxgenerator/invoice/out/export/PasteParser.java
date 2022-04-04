@@ -10,19 +10,10 @@ import etaxgenerator.counterparty.Counterparty;
 import etaxgenerator.counterparty.Database;
 import etaxgenerator.invoice.out.Invoice;
 import etaxgenerator.util.Util;
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import javax.swing.JComponent;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *

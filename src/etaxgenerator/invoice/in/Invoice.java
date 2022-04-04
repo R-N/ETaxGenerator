@@ -53,7 +53,11 @@ public class Invoice {
     }
     
     public static int getPPn(int dpp){
-        return (int)(dpp*0.1);
+        return getPPn(dpp, 0.11);
+    }
+    
+    public static int getPPn(int dpp, double ppnPercent){
+        return (int)(ppnPercent * dpp);
     }
     
     public void setDate(String date){

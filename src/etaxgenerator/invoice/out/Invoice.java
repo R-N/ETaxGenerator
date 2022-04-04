@@ -31,6 +31,7 @@ public class Invoice {
     public int month;
     public int year;
     public double dp = 0;
+    public double ppnPercent = 0.11;
     
     public Invoice(Counterparty counterparty){
         this.counterparty = counterparty;
@@ -77,8 +78,11 @@ public class Invoice {
         }
         return sum;
     }
-    public double getTotalPPN(){
-        return getTotalTotal() * 0.1;
+    public double getTotalPPn(){
+        return getTotalPPn(this.ppnPercent);
+    }
+    public double getTotalPPn(double ppnPercent){
+        return ppnPercent * getTotalTotal();
     }
     public String build(){
         String ret = String.format(Util.usLocale, "\"FK\",\"%s\",\"%d\",\"%s\",\"%d\",\"%d\",\"%s\",\"%s\",\"%s\",\"%s\",\"%.0f\",\"%.0f\",\"%.0f\",\"\",\"%s\",\"%.0f\",\"%.0f\",\"%.0f\",\"%s\"\n",
@@ -92,7 +96,7 @@ public class Invoice {
                 Util.escape(counterparty.getCapsName()),
                 Util.escape(counterparty.getFullAddress()),
                 getTotalTotal(),
-                getTotalPPN(),
+                getTotalPPn(),
                 0.0,
                 "0",
                 dp,

@@ -76,7 +76,7 @@ public class PasteParser{// implements ActionListener {
         gui.parseDate();
         gui.invoiceNoField.setText(invoiceNo);
         
-        gui.calculate();
+        gui.setPPn();
     }
     
     public String generate(){
