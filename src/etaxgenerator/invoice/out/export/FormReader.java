@@ -42,6 +42,7 @@ public class FormReader {
         inv.dp = Util.parseDouble(form.dpField.getText().trim(), indoComma);
         inv.setPPnPercent(Util.parseDouble(form.ppnPercentField.getText().trim()));
         inv.setTotalPPn(Util.parseDouble(form.ppnField.getText().trim()));
+        inv.setPPnDP(Util.parseDouble(form.ppnDPField.getText().trim()));
         
         int rowCount = form.itemTable.getRowCount();
         Item prev = null;

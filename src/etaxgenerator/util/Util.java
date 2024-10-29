@@ -199,7 +199,7 @@ public class Util {
         if(indoComma){
             df = dfIndoInt;
         }
-        df.applyPattern("###,##0.00");
+        df.applyPattern("###,##0.0#");
         return df.format(num);
     }
     static File logFile = null;
@@ -262,7 +262,7 @@ public class Util {
         if(indoComma){
             df = dfIndoDec;
         }
-        df.applyPattern("###,##0.00");
+        df.applyPattern("###,##0.0#");
         return df.format(num);
     }
     public static void showMessage(String content, String title){

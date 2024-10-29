@@ -54,8 +54,8 @@ public class GUI extends javax.swing.JFrame {
     public GUI() {
         initComponents();
         indoCommaCheckBox.setSelected(Config.indoComma);
-        df.applyPattern("###,##0.00");
-        dfIndo.applyPattern("###,##0.00");
+        df.applyPattern("###,##0.0#");
+        dfIndo.applyPattern("###,##0.0#");
         itemTableModel = (DefaultTableModel)itemTable.getModel();
         int colCount = itemTable.getColumnCount();
         itemTableColumnNames = new Object[colCount];
@@ -166,6 +166,7 @@ public class GUI extends javax.swing.JFrame {
         int rows = itemTable.getRowCount();
         double dpp = 0;
         double ppn = 0;
+        double dp = Util.parseDouble(dpField.getText());
         Item it = null;
         for (int i = 0; i < rows; ++i){
             it = reader.readItem(i, it);
@@ -174,12 +175,10 @@ public class GUI extends javax.swing.JFrame {
                 ppn += it.getPPn(ppnPercent);
             }
         }
-        String sDPP;
-        String sPPn;
-        sDPP = Util.formatNumber(dpp);
-        sPPn = Util.formatNumber(ppn);
-        dppLabel.setText(sDPP);
-        ppnField.setText(sPPn);
+        double ppnDP = dp * ppnPercent;
+        dppLabel.setText(Util.formatNumber(dpp));
+        ppnField.setText(Util.formatNumber(ppn));
+        ppnDPField.setText(Util.formatNumber(ppnDP));
     }
     
     public void calculateRetensi(){
@@ -256,8 +255,6 @@ public class GUI extends javax.swing.JFrame {
         revField = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         dateField = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        dpField = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         itemTable = new javax.swing.JTable();
         jPanel13 = new javax.swing.JPanel();
@@ -277,7 +274,6 @@ public class GUI extends javax.swing.JFrame {
         retensiLabel = new javax.swing.JLabel();
         calculateRetensiButton = new javax.swing.JButton();
         applyRetensiButton = new javax.swing.JButton();
-        jPanel14 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         dppLabel = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -285,6 +281,14 @@ public class GUI extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         ppnField = new javax.swing.JTextField();
         calculatePPnButton = new javax.swing.JButton();
+        jLabel20 = new javax.swing.JLabel();
+        dpField = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        jLabel22 = new javax.swing.JLabel();
+        ppnDPField = new javax.swing.JTextField();
+        jPanel14 = new javax.swing.JPanel();
+        jPanel16 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -493,28 +497,6 @@ public class GUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel7.add(dateField, gridBagConstraints);
 
-        jLabel12.setText("DP");
-        jLabel12.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel12.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
-        jLabel12.setPreferredSize(new java.awt.Dimension(80, 15));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel7.add(jLabel12, gridBagConstraints);
-
-        dpField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dpFieldActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel7.add(dpField, gridBagConstraints);
-
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.4;
@@ -648,6 +630,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel17.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel17.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel15.add(jLabel17, gridBagConstraints);
@@ -658,6 +641,7 @@ public class GUI extends javax.swing.JFrame {
         dprLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
         dprLabel.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
@@ -667,6 +651,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel18.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel18.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel15.add(jLabel18, gridBagConstraints);
@@ -680,6 +665,7 @@ public class GUI extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel15.add(retensiPercentField, gridBagConstraints);
@@ -688,6 +674,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel19.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel19.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel15.add(jLabel19, gridBagConstraints);
@@ -698,18 +685,20 @@ public class GUI extends javax.swing.JFrame {
         retensiLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
         retensiLabel.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel15.add(retensiLabel, gridBagConstraints);
 
-        calculateRetensiButton.setText("Calculate");
+        calculateRetensiButton.setText("Calc");
         calculateRetensiButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 calculateRetensiButtonActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel15.add(calculateRetensiButton, gridBagConstraints);
@@ -721,26 +710,19 @@ public class GUI extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel15.add(applyRetensiButton, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(jPanel15, gridBagConstraints);
-
-        jPanel14.setLayout(new java.awt.GridBagLayout());
 
         jLabel15.setText("DPP :");
         jLabel15.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel15.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel14.add(jLabel15, gridBagConstraints);
+        jPanel15.add(jLabel15, gridBagConstraints);
 
         dppLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         dppLabel.setText("0");
@@ -748,18 +730,20 @@ public class GUI extends javax.swing.JFrame {
         dppLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
         dppLabel.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel14.add(dppLabel, gridBagConstraints);
+        jPanel15.add(dppLabel, gridBagConstraints);
 
         jLabel13.setText("PPN");
         jLabel13.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel13.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel14.add(jLabel13, gridBagConstraints);
+        jPanel15.add(jLabel13, gridBagConstraints);
 
         ppnPercentField.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         ppnPercentField.setText("0.11");
@@ -769,17 +753,19 @@ public class GUI extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel14.add(ppnPercentField, gridBagConstraints);
+        jPanel15.add(ppnPercentField, gridBagConstraints);
 
         jLabel14.setText("=");
         jLabel14.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel14.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel14.add(jLabel14, gridBagConstraints);
+        jPanel15.add(jLabel14, gridBagConstraints);
 
         ppnField.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         ppnField.setText("0");
@@ -790,10 +776,11 @@ public class GUI extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel14.add(ppnField, gridBagConstraints);
+        jPanel15.add(ppnField, gridBagConstraints);
 
         calculatePPnButton.setText("Calculate");
         calculatePPnButton.addActionListener(new java.awt.event.ActionListener() {
@@ -802,16 +789,94 @@ public class GUI extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel14.add(calculatePPnButton, gridBagConstraints);
+        jPanel15.add(calculatePPnButton, gridBagConstraints);
+
+        jLabel20.setText("DP :");
+        jLabel20.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel20.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel15.add(jLabel20, gridBagConstraints);
+
+        dpField.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        dpField.setText("0");
+        dpField.setToolTipText("");
+        dpField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dpFieldActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel15.add(dpField, gridBagConstraints);
+
+        jLabel21.setText("PPN");
+        jLabel21.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel21.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel15.add(jLabel21, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 2;
+        jPanel15.add(filler1, gridBagConstraints);
+
+        jLabel22.setText("=");
+        jLabel22.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel22.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel15.add(jLabel22, gridBagConstraints);
+
+        ppnDPField.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        ppnDPField.setText("0");
+        ppnDPField.setToolTipText("");
+        ppnDPField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppnDPFieldActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel15.add(ppnDPField, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        getContentPane().add(jPanel15, gridBagConstraints);
+
+        jPanel14.setLayout(new java.awt.GridBagLayout());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(jPanel14, gridBagConstraints);
+
+        jPanel16.setLayout(new java.awt.GridBagLayout());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        getContentPane().add(jPanel16, gridBagConstraints);
 
         jPanel5.setLayout(new java.awt.GridBagLayout());
 
@@ -1132,6 +1197,10 @@ public class GUI extends javax.swing.JFrame {
         applyRetensi();
     }//GEN-LAST:event_applyRetensiButtonActionPerformed
 
+    private void ppnDPFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppnDPFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ppnDPFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1183,6 +1252,7 @@ public class GUI extends javax.swing.JFrame {
     public javax.swing.JTextField dpField;
     public javax.swing.JLabel dppLabel;
     public javax.swing.JLabel dprLabel;
+    private javax.swing.Box.Filler filler1;
     private javax.swing.JButton findNPWPButton;
     private javax.swing.JButton findNameButton;
     private javax.swing.JButton generateButton;
@@ -1197,7 +1267,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -1206,6 +1275,9 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1218,6 +1290,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1237,6 +1310,7 @@ public class GUI extends javax.swing.JFrame {
     public javax.swing.JTextField npwpField;
     private javax.swing.JButton parseButton;
     public javax.swing.JTextArea pasteField;
+    public javax.swing.JTextField ppnDPField;
     public javax.swing.JTextField ppnField;
     public javax.swing.JTextField ppnPercentField;
     private javax.swing.JLabel queueCountLabel;

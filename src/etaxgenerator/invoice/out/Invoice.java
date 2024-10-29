@@ -33,6 +33,7 @@ public class Invoice {
     public double dp = 0;
     public double ppnPercent = 0.11;
     public double totalPPn = 0;
+    public double ppnDP = 0;
     public double retensiPercent = 0;
     public double totalRetensi = 0;
     
@@ -87,6 +88,12 @@ public class Invoice {
     public double getTotalPPn(double ppnPercent){
         return ppnPercent * getTotalTotal();
     }
+    public double getPPnDP(){
+        return getPPnDP(this.ppnPercent);
+    }
+    public double getPPnDP(double ppnPercent){
+        return ppnPercent * this.dp;
+    }
     
     public void setPPnPercent(double ppnPercent){
         this.ppnPercent = ppnPercent;
@@ -94,6 +101,9 @@ public class Invoice {
     
     public void setTotalPPn(double ppn){
         this.totalPPn = ppn;
+    }
+    public void setPPnDP(double ppn){
+        this.ppnDP = ppn;
     }
     public void setRetensiPercent(double retensiPercent){
         this.retensiPercent = retensiPercent;
@@ -114,6 +124,9 @@ public class Invoice {
         if (this.totalPPn == 0){
             this.setTotalPPn(this.getTotalPPn());
         }
+        if (this.ppnDP == 0){
+            this.setPPnDP(this.getPPnDP());
+        }
         String ret = String.format(Util.usLocale, "\"FK\",\"%s\",\"%d\",\"%s\",\"%d\",\"%d\",\"%s\",\"%s\",\"%s\",\"%s\",\"%.0f\",\"%.0f\",\"%.0f\",\"\",\"%s\",\"%.0f\",\"%.0f\",\"%.0f\",\"%s\",\n",
                 "01",
                 rev,
@@ -129,7 +142,7 @@ public class Invoice {
                 0.0,
                 "0",
                 dp,
-                dp*0.1,
+                ppnDP,
                 0.0,
                 ""
         );
