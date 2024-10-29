@@ -270,6 +270,12 @@ public class Util {
         df.applyPattern("##0.0####");
         return df.format(num);
     }
+    public static String formatInt(double num){
+        return formatInt((int)num);
+    }
+    public static String formatInt(int num){
+        return String.valueOf(num);
+    }
     public static void showMessage(String content, String title){
         JOptionPane.showMessageDialog(null, content, title, JOptionPane.INFORMATION_MESSAGE);
     }

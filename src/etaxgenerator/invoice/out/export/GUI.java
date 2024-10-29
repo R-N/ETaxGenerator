@@ -183,8 +183,8 @@ public class GUI extends javax.swing.JFrame {
         double ppn = in.getTotalPPn();
         double ppnDP = in.getPPnDP();
         dppLabel.setText(Util.formatNumber(dpp));
-        ppnField.setText(Util.formatNumber(ppn));
-        ppnDPField.setText(Util.formatNumber(ppnDP));
+        ppnField.setText(Util.formatInt(ppn));
+        ppnDPField.setText(Util.formatInt(ppnDP));
         ppnCalculated = true;
     }
     
