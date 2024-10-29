@@ -58,3 +58,4 @@ build/*
 nbproject/private/
 /build
 build/built-jar.properties
+/nbproject/private
