@@ -53,3 +53,8 @@ dist/
 Network Trash Folder
 Temporary Items
 .apdisk
+build/
+build/*
+nbproject/private/
+/build
+build/built-jar.properties

@@ -53,7 +53,6 @@ public class GUI extends javax.swing.JFrame {
     public ExcelAdapter itemTableAdapter = null;
     public GUI() {
         initComponents();
-        Config.init();
         indoCommaCheckBox.setSelected(Config.indoComma);
         df.applyPattern("###,##0.00");
         dfIndo.applyPattern("###,##0.00");

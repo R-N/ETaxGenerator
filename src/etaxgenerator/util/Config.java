@@ -5,7 +5,9 @@
  */
 package etaxgenerator.util;
 
-import etaxgenerator.invoice.out.Invoice;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,13 +18,17 @@ import java.util.Locale;
  * @author MojoMacW7
  */
 public class Config {
+    public static String workDir = ".";
     public static String companyName = "PT CONCRETINDO NUSA CEMERLANG";
-    public static String companyAddress = "GUBENG KERTAJAYA 5-C/17, AIRLANGGA , SURABAYA";
+    public static String companyAddress = "JL GUBENG KERTAJAYA 5-C/17 , KOTA SURABAYA";
     public static String lastInvoiceNoPrefix = "";
     public static long lastInvoiceNo = 0;
     public static boolean indoComma = false;
     
-    public static void init(){
+    public static void init(Class main) throws URISyntaxException{
+        Path jarDir = Paths.get(main.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent();
+        Config.workDir = jarDir.toString();
+
         Database db = Database.getInstance();
         db.execute("CREATE TABLE IF NOT EXISTS Config(name TEXT PRIMARY KEY, value TEXT)");
         db.commit();

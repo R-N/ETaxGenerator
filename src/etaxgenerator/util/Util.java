@@ -207,7 +207,7 @@ public class Util {
     public static PrintWriter getLogWriter() throws FileNotFoundException, IOException{
         if (logWriter == null){
             if (logFile == null){
-                logFile = new File("log.txt");
+                logFile = new File(Config.workDir + "/log.txt");
                 if(logFile.exists()){
                     logFile.delete();
                 }
@@ -225,19 +225,25 @@ public class Util {
         }
     }
     
+    public static String stackTraceString(Exception ex){
+        StringWriter errors = new StringWriter();
+        ex.printStackTrace(new PrintWriter(errors));
+        return errors.toString();
+    }
+    
     public static void writeLog(String s){
         try{
             getLogWriter().println(s);
             getLogWriter().flush();
         }catch(Exception ex){
             ex.printStackTrace();
-            showError(ex.getStackTrace().toString(), ex.getMessage());
+            showError(stackTraceString(ex), ex.getMessage());
         }finally{
             try{
                 closeLogWriter();
             }catch(Exception ex){
                 ex.printStackTrace();
-                showError(ex.getStackTrace().toString(), ex.getMessage());
+                showError(stackTraceString(ex), ex.getMessage());
             }
         }
     }
@@ -250,7 +256,6 @@ public class Util {
     public static void init(){
         log("ETAXGENERATOR");
         log(LocalDateTime.now().toString());
-        Config.init();
     }
     public static String formatNumber(double num, boolean indoComma){
         DecimalFormat df = dfDec;

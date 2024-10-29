@@ -18,7 +18,8 @@ import java.sql.Statement;
  * @author MojoMacW7
  */
 public class Database {
-    public static final String url = "jdbc:sqlite:database.db";
+    public static final String urlPrefix = "jdbc:sqlite:";
+    public static final String urlFile = "database.db";
     public static Database instance = null;
     
     public static Database getInstance(){
@@ -29,11 +30,15 @@ public class Database {
     }
     public Connection conn;
     
+    public String getUrl(){
+        return Database.urlPrefix + Config.workDir + "/" + Database.urlFile;
+    }
+    
     public Database(String url){
         connect(url);
     }
     public Database(){
-        connect(url);
+        connect(getUrl());
     }
     
     public boolean setAutoCommit(boolean autoCommit){
@@ -66,7 +71,6 @@ public class Database {
             instance = this;
             setAutoCommit(false);
             System.out.println("Connected");
-            Config.init();
             etaxgenerator.counterparty.Database.getInstance();
             return true;
         } catch (SQLException ex) {
