@@ -13,6 +13,7 @@ import etaxgenerator.invoice.out.Item;
 import etaxgenerator.util.Config;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Locale;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -31,6 +32,9 @@ public class GUI extends javax.swing.JFrame {
     DefaultTableModel itemTableModel;
     PasteParser parser;
     Object[] itemTableColumnNames;
+    
+    double preRetensi = 0;
+    
     public static DecimalFormat df = (DecimalFormat)NumberFormat.getNumberInstance(Util.usLocale);
     public static DecimalFormat dfIndo = (DecimalFormat)NumberFormat.getNumberInstance(Util.idLocale);
     public void clearForm(){
@@ -48,6 +52,10 @@ public class GUI extends javax.swing.JFrame {
             invoiceNoField.setText(Config.lastInvoiceNoPrefix + String.valueOf(Config.lastInvoiceNo+1));
         }
         refreshItemCount();
+        preRetensi = 0;
+        calculateRetensiButton.setEnabled(true);
+        applyRetensiButton.setEnabled(true);
+        calculateRetensi();
         calculatePPn();
     }
     public ExcelAdapter itemTableAdapter = null;
@@ -157,67 +165,64 @@ public class GUI extends javax.swing.JFrame {
         itemCountField.setText(String.valueOf(itemTable.getRowCount()));
     }
     
-    public void calculatePPn(){
-        double ppnPercent = Util.parseDouble(ppnPercentField.getText());
-        this.calculatePPn(ppnPercent);
+    public double getTotal(){
+        return getTotal(reader.readInvoice());
     }
     
-    public void calculatePPn(double ppnPercent){
-        int rows = itemTable.getRowCount();
-        double dpp = 0;
-        double ppn = 0;
-        double dp = Util.parseDouble(dpField.getText());
-        Item it = null;
-        for (int i = 0; i < rows; ++i){
-            it = reader.readItem(i, it);
-            if(it != null){
-                dpp+=it.getTotal();
-                ppn += it.getPPn(ppnPercent);
-            }
-        }
-        double ppnDP = dp * ppnPercent;
+    public double getTotal(Invoice in){
+        return in.getTotalTotal();
+    }
+    
+    public void calculatePPn(){
+        Invoice in = reader.readInvoice();
+        double dpp = in.getTotalTotal();
+        double ppn = in.getTotalPPn();
+        double ppnDP = in.getPPnDP();
         dppLabel.setText(Util.formatNumber(dpp));
         ppnField.setText(Util.formatNumber(ppn));
         ppnDPField.setText(Util.formatNumber(ppnDP));
     }
     
     public void calculateRetensi(){
-        double retensiPercent = Util.parseDouble(retensiPercentField.getText());
-        this.calculateRetensi(retensiPercent);
-    }
-    
-    public void calculateRetensi(double retensiPercent){
-        int rows = itemTable.getRowCount();
-        double dpr = 0;
-        double retensi = 0;
-        Item it = null;
-        for (int i = 0; i < rows; ++i){
-            it = reader.readItem(i, it);
-            if(it != null){
-                dpr+=it.getTotal();
-                retensi += it.getRetensi(retensiPercent);
-            }
+        if(this.preRetensi == 0){
+            this.calculateRetensi1();
+        }else{
+            this.calculateRetensi2();
         }
-        String sDPR;
-        String sRetensi;
-        sDPR = Util.formatNumber(dpr);
-        sRetensi = Util.formatNumber(retensi);
-        dprLabel.setText(sDPR);
-        retensiLabel.setText(sRetensi);
     }
     
+    public void calculateRetensi1(){
+        Invoice in = reader.readInvoice();
+        double dpr = in.getTotalTotal();
+        double retensi = in.getTotalRetensi();
+        dprLabel.setText(Util.formatNumber(dpr));
+        retensiLabel.setText(Util.formatNumber(retensi));
+    }
+    
+    public void calculateRetensi2(){
+        Invoice in = reader.readInvoice();
+        double dpr = this.preRetensi;
+        double retensi = dpr - in.getTotalTotal();
+        dprLabel.setText(Util.formatNumber(dpr));
+        retensiLabel.setText(Util.formatNumber(retensi));
+    }
+
     public void applyRetensi(){
         double retensiPercent = Util.parseDouble(retensiPercentField.getText());
         int rows = itemTable.getRowCount();
-        double retensi = 0;
+        double dpr = 0;
         Item it = null;
         for (int i = 0; i < rows; ++i){
             it = reader.readItem(i, it);
             if(it != null){
+                dpr += it.getTotal();
                 it.applyRetensi(retensiPercent);
                 itemTable.setValueAt(Util.formatNumber(it.price), i, 2);
             }
         }
+        this.preRetensi = dpr;
+        this.calculateRetensi();
+        applyRetensiButton.setEnabled(false);
         calculatePPn();
     }
     
@@ -521,7 +526,6 @@ public class GUI extends javax.swing.JFrame {
             }
         });
         itemTable.setMinimumSize(new java.awt.Dimension(64, 64));
-        itemTable.setPreferredSize(null);
         jScrollPane3.setViewportView(itemTable);
 
         gridBagConstraints = new java.awt.GridBagConstraints();

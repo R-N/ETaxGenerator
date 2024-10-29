@@ -10,6 +10,7 @@ import etaxgenerator.counterparty.Counterparty;
 import etaxgenerator.invoice.out.Invoice;
 import etaxgenerator.invoice.out.Item;
 import etaxgenerator.util.Config;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -43,6 +44,7 @@ public class FormReader {
         inv.setPPnPercent(Util.parseDouble(form.ppnPercentField.getText().trim()));
         inv.setTotalPPn(Util.parseDouble(form.ppnField.getText().trim()));
         inv.setPPnDP(Util.parseDouble(form.ppnDPField.getText().trim()));
+        inv.setRetensiPercent(Util.parseDouble(form.retensiPercentField.getText().trim()));
         
         int rowCount = form.itemTable.getRowCount();
         Item prev = null;
@@ -78,4 +80,17 @@ public class FormReader {
         return it;
     }
     
+    public Item[] readItems(){
+        int rows = form.itemTable.getRowCount();
+        Item it = null;
+        ArrayList<Item> items = new ArrayList<Item>(rows);
+        for (int i = 0; i < rows; ++i){
+            it = this.readItem(i, it);
+            if(it != null){
+                items.add(it);
+            }
+        }
+        Item[] ret = new Item[items.size()];
+        return items.toArray(ret);
+    }
 }
