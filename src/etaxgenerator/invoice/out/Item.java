@@ -32,10 +32,10 @@ public class Item {
     public double getTotal(){
         return getSubtotal() - getTotalDiscount();
     }
-    public double getPPn(){
-        return getTotal()*0.1;
+    public double getPPn(double percent){
+        return getTotal()*percent;
     }
-    public String build(){
+    public String build(double ppnPercent){
         return String.format(Util.usLocale, "\"OF\",\"%s\",\"%s\",\"%.1f\",\"%.1f\",\"%.1f\",\"%.1f\",\"%.1f\",\"%.1f\",\"%s\",\"%.1f\"\n",
                 "",
                 Util.escape(name),
@@ -44,7 +44,7 @@ public class Item {
                 getSubtotal(),
                 getTotalDiscount(),
                 getTotal(),
-                getPPn(),
+                getPPn(ppnPercent),
                 "0",
                 0.0
         );

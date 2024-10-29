@@ -17,7 +17,7 @@ import java.util.Locale;
  * @author MojoMacW7
  */
 public class Invoice {
-    public static final String header0 = "\"FK\",\"KD_JENIS_TRANSAKSI\",\"FG_PENGGANTI\",\"NOMOR_FAKTUR\",\"MASA_PAJAK\",\"TAHUN_PAJAK\",\"TANGGAL_FAKTUR\",\"NPWP\",\"NAMA\",\"ALAMAT_LENGKAP\",\"JUMLAH_DPP\",\"JUMLAH_PPN\",\"JUMLAH_PPNBM\",\"ID_KETERANGAN_TAMBAHAN\",\"FG_UANG_MUKA\",\"UANG_MUKA_DPP\",\"UANG_MUKA_PPN\",\"UANG_MUKA_PPNBM\",\"REFERENSI\"\n"
+    public static final String header0 = "\"FK\",\"KD_JENIS_TRANSAKSI\",\"FG_PENGGANTI\",\"NOMOR_FAKTUR\",\"MASA_PAJAK\",\"TAHUN_PAJAK\",\"TANGGAL_FAKTUR\",\"NPWP\",\"NAMA\",\"ALAMAT_LENGKAP\",\"JUMLAH_DPP\",\"JUMLAH_PPN\",\"JUMLAH_PPNBM\",\"ID_KETERANGAN_TAMBAHAN\",\"FG_UANG_MUKA\",\"UANG_MUKA_DPP\",\"UANG_MUKA_PPN\",\"UANG_MUKA_PPNBM\",\"REFERENSI\",\"KODE_DOKUMEN_PENDUKUNG\"\n"
                 + "\"LT\",\"NPWP\",\"NAMA\",\"JALAN\",\"BLOK\",\"NOMOR\",\"RT\",\"RW\",\"KECAMATAN\",\"KELURAHAN\",\"KABUPATEN\",\"PROPINSI\",\"KODE_POS\",\"NOMOR_TELEPON\"\n"
                 + "\"OF\",\"KODE_OBJEK\",\"NAMA\",\"HARGA_SATUAN\",\"JUMLAH_BARANG\",\"HARGA_TOTAL\",\"DISKON\",\"DPP\",\"PPN\",\"TARIF_PPNBM\",\"PPNBM\"";
     
@@ -32,6 +32,7 @@ public class Invoice {
     public int year;
     public double dp = 0;
     public double ppnPercent = 0.11;
+    public double totalPPn = 0;
     
     public Invoice(Counterparty counterparty){
         this.counterparty = counterparty;
@@ -84,8 +85,20 @@ public class Invoice {
     public double getTotalPPn(double ppnPercent){
         return ppnPercent * getTotalTotal();
     }
+    
+    public void setPPnPercent(double ppnPercent){
+        this.ppnPercent = ppnPercent;
+    }
+    
+    public void setTotalPPn(double ppn){
+        this.totalPPn = ppn;
+    }
+    
     public String build(){
-        String ret = String.format(Util.usLocale, "\"FK\",\"%s\",\"%d\",\"%s\",\"%d\",\"%d\",\"%s\",\"%s\",\"%s\",\"%s\",\"%.0f\",\"%.0f\",\"%.0f\",\"\",\"%s\",\"%.0f\",\"%.0f\",\"%.0f\",\"%s\"\n",
+        if (this.totalPPn == 0){
+            this.setTotalPPn(this.getTotalPPn());
+        }
+        String ret = String.format(Util.usLocale, "\"FK\",\"%s\",\"%d\",\"%s\",\"%d\",\"%d\",\"%s\",\"%s\",\"%s\",\"%s\",\"%.0f\",\"%.0f\",\"%.0f\",\"\",\"%s\",\"%.0f\",\"%.0f\",\"%.0f\",\"%s\",\n",
                 "01",
                 rev,
                 getNumberNo(),
@@ -96,7 +109,7 @@ public class Invoice {
                 Util.escape(counterparty.getCapsName()),
                 Util.escape(counterparty.getFullAddress()),
                 getTotalTotal(),
-                getTotalPPn(),
+                this.totalPPn,
                 0.0,
                 "0",
                 dp,
@@ -106,7 +119,7 @@ public class Invoice {
         );
         ret = ret + Config.buildInvoiceInfo();
         for (Item i : items){
-            ret = ret + i.build();
+            ret = ret + i.build(ppnPercent);
         }
         return ret;
     }

@@ -124,7 +124,8 @@ public class GUI extends javax.swing.JFrame {
         calculate();
         String sLastInvoiceNo = Util.trim(invoiceNoField.getText());
         Config.setLastInvoiceNo(sLastInvoiceNo);
-        builder.add(reader.readInvoice());
+        Invoice in = reader.readInvoice();
+        builder.add(in);
         refreshQueueCount();
         return true;
     }
@@ -155,7 +156,13 @@ public class GUI extends javax.swing.JFrame {
     public void refreshItemCount(){
         itemCountField.setText(String.valueOf(itemTable.getRowCount()));
     }
+    
     public void calculate(){
+        double ppnPercent = Util.parseDouble(ppnPercentField.getText());
+        this.calculate(ppnPercent);
+    }
+    
+    public void calculate(double ppnPercent){
         int rows = itemTable.getRowCount();
         double dpp = 0;
         double ppn = 0;
@@ -164,7 +171,7 @@ public class GUI extends javax.swing.JFrame {
             it = reader.readItem(i, it);
             if(it != null){
                 dpp+=it.getTotal();
-                ppn += it.getPPn();
+                ppn += it.getPPn(ppnPercent);
             }
         }
         String sDPP;
@@ -172,7 +179,7 @@ public class GUI extends javax.swing.JFrame {
         sDPP = Util.formatNumber(dpp);
         sPPn = Util.formatNumber(ppn);
         dppLabel.setText(sDPP);
-        ppnLabel.setText(sPPn);
+        ppnField.setText(sPPn);
     }
     
     @SuppressWarnings("unchecked")
@@ -227,7 +234,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         ppnPercentField = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        ppnLabel = new javax.swing.JLabel();
+        ppnField = new javax.swing.JTextField();
         calculateButton = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -282,7 +289,6 @@ public class GUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Faktur Keluaran - ETaxGenerator");
-        setPreferredSize(new java.awt.Dimension(1024, 640));
         setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
@@ -447,6 +453,12 @@ public class GUI extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel7.add(jLabel12, gridBagConstraints);
+
+        dpField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dpFieldActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -470,7 +482,15 @@ public class GUI extends javax.swing.JFrame {
             new String [] {
                 "Item", "Qty", "Harga", "Diskon Persen", "Diskon Value"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Double.class, java.lang.Object.class, java.lang.Double.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         itemTable.setMinimumSize(new java.awt.Dimension(64, 64));
         itemTable.setPreferredSize(null);
         jScrollPane3.setViewportView(itemTable);
@@ -622,16 +642,19 @@ public class GUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel14.add(jLabel14, gridBagConstraints);
 
-        ppnLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        ppnLabel.setText("0");
-        ppnLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        ppnLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
-        ppnLabel.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppnField.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        ppnField.setText("0");
+        ppnField.setToolTipText("");
+        ppnField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppnFieldActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel14.add(ppnLabel, gridBagConstraints);
+        jPanel14.add(ppnField, gridBagConstraints);
 
         calculateButton.setText("Calculate");
         calculateButton.addActionListener(new java.awt.event.ActionListener() {
@@ -677,7 +700,7 @@ public class GUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel5.add(jScrollPane2, gridBagConstraints);
 
-        jPanel4.setLayout(new java.awt.FlowLayout(1, 4, 4));
+        jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 4, 4));
 
         indoCommaCheckBox.setText("Indo Comma");
         indoCommaCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -708,7 +731,7 @@ public class GUI extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         jPanel5.add(jPanel4, gridBagConstraints);
 
-        jPanel6.setLayout(new java.awt.FlowLayout(1, 4, 4));
+        jPanel6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 4, 4));
 
         clearFormButton.setText("Clear Form");
         clearFormButton.addActionListener(new java.awt.event.ActionListener() {
@@ -948,6 +971,14 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ppnPercentFieldActionPerformed
 
+    private void dpFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dpFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dpFieldActionPerformed
+
+    private void ppnFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppnFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ppnFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1046,7 +1077,7 @@ public class GUI extends javax.swing.JFrame {
     public javax.swing.JTextField npwpField;
     private javax.swing.JButton parseButton;
     public javax.swing.JTextArea pasteField;
-    public javax.swing.JLabel ppnLabel;
+    public javax.swing.JTextField ppnField;
     public javax.swing.JTextField ppnPercentField;
     private javax.swing.JLabel queueCountLabel;
     public javax.swing.JButton reduceItemCountButton;
