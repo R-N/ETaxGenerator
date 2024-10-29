@@ -32,7 +32,8 @@ public class GUI extends javax.swing.JFrame {
     DefaultTableModel itemTableModel;
     PasteParser parser;
     Object[] itemTableColumnNames;
-    
+
+    boolean ppnCalculated = false;
     double preRetensi = 0;
     
     public static DecimalFormat df = (DecimalFormat)NumberFormat.getNumberInstance(Util.usLocale);
@@ -53,6 +54,7 @@ public class GUI extends javax.swing.JFrame {
         }
         refreshItemCount();
         preRetensi = 0;
+        ppnCalculated = false;
         calculateRetensiButton.setEnabled(true);
         applyRetensiButton.setEnabled(true);
         calculateRetensi();
@@ -129,7 +131,9 @@ public class GUI extends javax.swing.JFrame {
         if (!check()){
             return false;
         }
-        calculatePPn();
+        if (!ppnCalculated){
+            calculatePPn();
+        }
         String sLastInvoiceNo = Util.trim(invoiceNoField.getText());
         Config.setLastInvoiceNo(sLastInvoiceNo);
         Invoice in = reader.readInvoice();
@@ -181,6 +185,7 @@ public class GUI extends javax.swing.JFrame {
         dppLabel.setText(Util.formatNumber(dpp));
         ppnField.setText(Util.formatNumber(ppn));
         ppnDPField.setText(Util.formatNumber(ppnDP));
+        ppnCalculated = true;
     }
     
     public void calculateRetensi(){
