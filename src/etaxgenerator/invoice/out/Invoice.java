@@ -33,6 +33,8 @@ public class Invoice {
     public double dp = 0;
     public double ppnPercent = 0.11;
     public double totalPPn = 0;
+    public double retensiPercent = 0;
+    public double totalRetensi = 0;
     
     public Invoice(Counterparty counterparty){
         this.counterparty = counterparty;
@@ -92,6 +94,20 @@ public class Invoice {
     
     public void setTotalPPn(double ppn){
         this.totalPPn = ppn;
+    }
+    public void setRetensiPercent(double retensiPercent){
+        this.retensiPercent = retensiPercent;
+    }
+    public double getTotalRetensi(){
+        return getTotalRetensi(this.retensiPercent);
+    }
+    public double getTotalRetensi(double retensiPercent){
+        return getTotalTotal()*retensiPercent;
+    }
+    public void applyRetensi(double retensiPercent){
+        for (Item i : items){
+            i.applyRetensi(retensiPercent);
+        }
     }
     
     public String build(){

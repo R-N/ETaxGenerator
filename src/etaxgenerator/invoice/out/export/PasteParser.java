@@ -94,7 +94,7 @@ public class PasteParser{// implements ActionListener {
         }
         gui.itemTableAdapter.paste(items);
         gui.refreshItemCount();
-        gui.calculate();
+        gui.calculatePPn();
     }
     public String generate(){
         Invoice in = gui.reader.readInvoice();

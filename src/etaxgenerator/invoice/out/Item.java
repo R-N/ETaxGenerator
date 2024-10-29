@@ -35,6 +35,12 @@ public class Item {
     public double getPPn(double percent){
         return getTotal()*percent;
     }
+    public double getRetensi(double percent){
+        return getTotal()*percent;
+    }
+    public void applyRetensi(double percent){
+        this.price *= 1.0 - percent;
+    }
     public String build(double ppnPercent){
         return String.format(Util.usLocale, "\"OF\",\"%s\",\"%s\",\"%.1f\",\"%.1f\",\"%.1f\",\"%.1f\",\"%.1f\",\"%.1f\",\"%s\",\"%.1f\"\n",
                 "",

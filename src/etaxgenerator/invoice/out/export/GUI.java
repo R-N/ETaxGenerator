@@ -48,7 +48,7 @@ public class GUI extends javax.swing.JFrame {
             invoiceNoField.setText(Config.lastInvoiceNoPrefix + String.valueOf(Config.lastInvoiceNo+1));
         }
         refreshItemCount();
-        calculate();
+        calculatePPn();
     }
     public ExcelAdapter itemTableAdapter = null;
     public GUI() {
@@ -121,7 +121,7 @@ public class GUI extends javax.swing.JFrame {
         if (!check()){
             return false;
         }
-        calculate();
+        calculatePPn();
         String sLastInvoiceNo = Util.trim(invoiceNoField.getText());
         Config.setLastInvoiceNo(sLastInvoiceNo);
         Invoice in = reader.readInvoice();
@@ -157,12 +157,12 @@ public class GUI extends javax.swing.JFrame {
         itemCountField.setText(String.valueOf(itemTable.getRowCount()));
     }
     
-    public void calculate(){
+    public void calculatePPn(){
         double ppnPercent = Util.parseDouble(ppnPercentField.getText());
-        this.calculate(ppnPercent);
+        this.calculatePPn(ppnPercent);
     }
     
-    public void calculate(double ppnPercent){
+    public void calculatePPn(double ppnPercent){
         int rows = itemTable.getRowCount();
         double dpp = 0;
         double ppn = 0;
@@ -180,6 +180,46 @@ public class GUI extends javax.swing.JFrame {
         sPPn = Util.formatNumber(ppn);
         dppLabel.setText(sDPP);
         ppnField.setText(sPPn);
+    }
+    
+    public void calculateRetensi(){
+        double retensiPercent = Util.parseDouble(retensiPercentField.getText());
+        this.calculateRetensi(retensiPercent);
+    }
+    
+    public void calculateRetensi(double retensiPercent){
+        int rows = itemTable.getRowCount();
+        double dpr = 0;
+        double retensi = 0;
+        Item it = null;
+        for (int i = 0; i < rows; ++i){
+            it = reader.readItem(i, it);
+            if(it != null){
+                dpr+=it.getTotal();
+                retensi += it.getRetensi(retensiPercent);
+            }
+        }
+        String sDPR;
+        String sRetensi;
+        sDPR = Util.formatNumber(dpr);
+        sRetensi = Util.formatNumber(retensi);
+        dprLabel.setText(sDPR);
+        retensiLabel.setText(sRetensi);
+    }
+    
+    public void applyRetensi(){
+        double retensiPercent = Util.parseDouble(retensiPercentField.getText());
+        int rows = itemTable.getRowCount();
+        double retensi = 0;
+        Item it = null;
+        for (int i = 0; i < rows; ++i){
+            it = reader.readItem(i, it);
+            if(it != null){
+                it.applyRetensi(retensiPercent);
+                itemTable.setValueAt(Util.formatNumber(it.price), i, 2);
+            }
+        }
+        calculatePPn();
     }
     
     @SuppressWarnings("unchecked")
@@ -228,6 +268,15 @@ public class GUI extends javax.swing.JFrame {
         increaseItemCountButton = new javax.swing.JButton();
         moveRowUpButton = new javax.swing.JButton();
         moveRowDownButton = new javax.swing.JButton();
+        jPanel15 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        dprLabel = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        retensiPercentField = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        retensiLabel = new javax.swing.JLabel();
+        calculateRetensiButton = new javax.swing.JButton();
+        applyRetensiButton = new javax.swing.JButton();
         jPanel14 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         dppLabel = new javax.swing.JLabel();
@@ -235,7 +284,7 @@ public class GUI extends javax.swing.JFrame {
         ppnPercentField = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         ppnField = new javax.swing.JTextField();
-        calculateButton = new javax.swing.JButton();
+        calculatePPnButton = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -593,6 +642,96 @@ public class GUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(jPanel13, gridBagConstraints);
 
+        jPanel15.setLayout(new java.awt.GridBagLayout());
+
+        jLabel17.setText("Retensi :");
+        jLabel17.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel17.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel15.add(jLabel17, gridBagConstraints);
+
+        dprLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        dprLabel.setText("0");
+        dprLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        dprLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        dprLabel.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel15.add(dprLabel, gridBagConstraints);
+
+        jLabel18.setText("x");
+        jLabel18.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel18.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel15.add(jLabel18, gridBagConstraints);
+
+        retensiPercentField.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        retensiPercentField.setText("0");
+        retensiPercentField.setToolTipText("");
+        retensiPercentField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                retensiPercentFieldActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel15.add(retensiPercentField, gridBagConstraints);
+
+        jLabel19.setText("=");
+        jLabel19.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel19.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel15.add(jLabel19, gridBagConstraints);
+
+        retensiLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        retensiLabel.setText("0");
+        retensiLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        retensiLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        retensiLabel.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel15.add(retensiLabel, gridBagConstraints);
+
+        calculateRetensiButton.setText("Calculate");
+        calculateRetensiButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calculateRetensiButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel15.add(calculateRetensiButton, gridBagConstraints);
+
+        applyRetensiButton.setText("Apply");
+        applyRetensiButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                applyRetensiButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel15.add(applyRetensiButton, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        getContentPane().add(jPanel15, gridBagConstraints);
+
         jPanel14.setLayout(new java.awt.GridBagLayout());
 
         jLabel15.setText("DPP :");
@@ -634,7 +773,7 @@ public class GUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel14.add(ppnPercentField, gridBagConstraints);
 
-        jLabel14.setText(":");
+        jLabel14.setText("=");
         jLabel14.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel14.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -656,16 +795,16 @@ public class GUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel14.add(ppnField, gridBagConstraints);
 
-        calculateButton.setText("Calculate");
-        calculateButton.addActionListener(new java.awt.event.ActionListener() {
+        calculatePPnButton.setText("Calculate");
+        calculatePPnButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                calculateButtonActionPerformed(evt);
+                calculatePPnButtonActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        jPanel14.add(calculateButton, gridBagConstraints);
+        jPanel14.add(calculatePPnButton, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
@@ -954,13 +1093,13 @@ public class GUI extends javax.swing.JFrame {
             if(temp[i][2] > 0 ) dtm.setValueAt(Util.formatNumber(temp[i][2]), i, 3);
             if(temp[i][3] > 0 ) dtm.setValueAt(Util.formatNumber(temp[i][3]), i, 4);
         }
-        calculate();
+        calculatePPn();
     }//GEN-LAST:event_indoCommaCheckBoxActionPerformed
 
-    private void calculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateButtonActionPerformed
+    private void calculatePPnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculatePPnButtonActionPerformed
         // TODO add your handling code here:
-        calculate();
-    }//GEN-LAST:event_calculateButtonActionPerformed
+        calculatePPn();
+    }//GEN-LAST:event_calculatePPnButtonActionPerformed
 
     private void generateExcelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateExcelButtonActionPerformed
         // TODO add your handling code here:
@@ -978,6 +1117,20 @@ public class GUI extends javax.swing.JFrame {
     private void ppnFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppnFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ppnFieldActionPerformed
+
+    private void retensiPercentFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retensiPercentFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_retensiPercentFieldActionPerformed
+
+    private void calculateRetensiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateRetensiButtonActionPerformed
+        // TODO add your handling code here:
+        calculateRetensi();
+    }//GEN-LAST:event_calculateRetensiButtonActionPerformed
+
+    private void applyRetensiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyRetensiButtonActionPerformed
+        // TODO add your handling code here:
+        applyRetensi();
+    }//GEN-LAST:event_applyRetensiButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1018,7 +1171,9 @@ public class GUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     public javax.swing.JTextArea addressField;
-    private javax.swing.JButton calculateButton;
+    private javax.swing.JButton applyRetensiButton;
+    private javax.swing.JButton calculatePPnButton;
+    private javax.swing.JButton calculateRetensiButton;
     private javax.swing.JButton clearFormButton;
     private javax.swing.JButton clearQueueButton;
     public javax.swing.JTextField customerField;
@@ -1027,6 +1182,7 @@ public class GUI extends javax.swing.JFrame {
     public javax.swing.JButton deleteRowButton;
     public javax.swing.JTextField dpField;
     public javax.swing.JLabel dppLabel;
+    public javax.swing.JLabel dprLabel;
     private javax.swing.JButton findNPWPButton;
     private javax.swing.JButton findNameButton;
     private javax.swing.JButton generateButton;
@@ -1046,6 +1202,9 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1058,6 +1217,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1081,6 +1241,8 @@ public class GUI extends javax.swing.JFrame {
     public javax.swing.JTextField ppnPercentField;
     private javax.swing.JLabel queueCountLabel;
     public javax.swing.JButton reduceItemCountButton;
+    public javax.swing.JLabel retensiLabel;
+    public javax.swing.JTextField retensiPercentField;
     public javax.swing.JTextField revField;
     // End of variables declaration//GEN-END:variables
 }
