@@ -46,6 +46,7 @@ public class Config {
             
         }
         defaultIndoComma();
+        setIndoComma();
     }
     
     public static void setLastInvoiceNo(String sLastInvoiceNo){
@@ -66,6 +67,9 @@ public class Config {
         Config.lastInvoiceNo = Util.parseLong(s2[2]);
         Config.save("lastInvoiceNo", s22);
         Config.save("lastInvoiceNoPrefix", prefix);
+    }
+    public static void setIndoComma(){
+        setIndoComma(Locale.getDefault().equals(Util.idLocale));
     }
     public static void defaultIndoComma(){
         String sIndoComma = get("indoComma");
