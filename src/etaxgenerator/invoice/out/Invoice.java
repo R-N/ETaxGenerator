@@ -86,13 +86,13 @@ public class Invoice {
         return getTotalPPn(this.ppnPercent);
     }
     public double getTotalPPn(double ppnPercent){
-        return ppnPercent * getTotalTotal();
+        return (int)(ppnPercent * getTotalTotal());
     }
     public double getPPnDP(){
         return getPPnDP(this.ppnPercent);
     }
     public double getPPnDP(double ppnPercent){
-        return ppnPercent * this.dp;
+        return (int)(ppnPercent * this.dp);
     }
     
     public void setPPnPercent(double ppnPercent){
