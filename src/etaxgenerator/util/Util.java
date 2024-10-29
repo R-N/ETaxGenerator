@@ -265,6 +265,11 @@ public class Util {
         df.applyPattern("###,##0.0#");
         return df.format(num);
     }
+    public static String formatDouble(double num){
+        DecimalFormat df = dfDec;
+        df.applyPattern("##0.0#");
+        return df.format(num);
+    }
     public static void showMessage(String content, String title){
         JOptionPane.showMessageDialog(null, content, title, JOptionPane.INFORMATION_MESSAGE);
     }

@@ -42,17 +42,17 @@ public class Item {
         this.price *= 1.0 - percent;
     }
     public String build(double ppnPercent){
-        return String.format(Util.usLocale, "\"OF\",\"%s\",\"%s\",\"%.1f\",\"%.1f\",\"%.1f\",\"%.1f\",\"%.1f\",\"%.1f\",\"%s\",\"%.1f\"\n",
+        return String.format(Util.usLocale, "\"OF\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"\n",
                 "",
                 Util.escape(name),
-                price,
-                qty,
-                getSubtotal(),
-                getTotalDiscount(),
-                getTotal(),
-                getPPn(ppnPercent),
+                Util.formatDouble(price),
+                Util.formatDouble(qty),
+                Util.formatDouble(getSubtotal()),
+                Util.formatDouble(getTotalDiscount()),
+                Util.formatDouble(getTotal()),
+                Util.formatDouble(getPPn(ppnPercent)),
                 "0",
-                0.0
+                Util.formatDouble(0.0)
         );
     }
 }
