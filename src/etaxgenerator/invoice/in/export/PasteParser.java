@@ -53,13 +53,19 @@ public class PasteParser{// implements ActionListener {
         String dppPlusPPn = "";
         String ppn = "";
         String fullCustomer = "";
-        int cl = cols.length;
-        if (cl > 0) date = cols[0].trim();
-        if (cl > 2) fullCustomer = cols[2].trim();
-        if (cl > 3) dppPlusPPn = cols[3].trim();
-        if(Util.isNullEmptyOrZero(dppPlusPPn) && cl > 5) dppPlusPPn = cols[5].trim();
-        if(cl > 8) ppn = cols[8].trim();
-        if(cl > 9) invoiceNo = cols[9].trim();
+        int cl0 = cols.length;
+        int cl1 = 0;
+        int cl = cl0;
+        if (cl > 10){
+            cl = 10;
+            cl1 = cl0 - cl;
+        }
+        if (cl > 0) date = cols[0+cl1].trim();
+        if (cl > 2) fullCustomer = cols[2+cl1].trim();
+        if (cl > 3) dppPlusPPn = cols[3+cl1].trim();
+        if(Util.isNullEmptyOrZero(dppPlusPPn) && cl > 5) dppPlusPPn = cols[5+cl1].trim();
+        if(cl > 8) ppn = cols[8+cl1].trim();
+        if(cl > 9) invoiceNo = cols[9+cl1].trim();
         int iPPn = Util.parseInt(ppn);
         int iDPPPlusPPn = Util.parseInt(dppPlusPPn);
         int iDPP = iDPPPlusPPn - iPPn;

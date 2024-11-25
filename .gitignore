@@ -59,3 +59,5 @@ nbproject/private/
 /build
 build/built-jar.properties
 /nbproject/private
+/nbproject
+nbproject/private/private.xml
