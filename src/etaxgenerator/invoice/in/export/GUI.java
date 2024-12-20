@@ -132,8 +132,8 @@ public class GUI extends javax.swing.JFrame {
     
     public int getPPn(){
         return Invoice.getPPn(
-                Util.parseInt(dppField.getText()),
-                Util.parseDouble(ppnPercentField.getText())
+            Util.parseInt(dppField.getText()),
+            Util.parseDouble(ppnPercentField.getText())
         );
     }
     
@@ -190,6 +190,7 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         pasteField = new javax.swing.JTextArea();
         jPanel6 = new javax.swing.JPanel();
+        dppPPNCheckBox = new javax.swing.JCheckBox();
         indoCommaCheckBox = new javax.swing.JCheckBox();
         parseButton = new javax.swing.JButton();
         generateExcelButton = new javax.swing.JButton();
@@ -298,7 +299,6 @@ public class GUI extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel7.add(jLabel5, gridBagConstraints);
-        jLabel5.getAccessibleContext().setAccessibleName("Alamat");
 
         jScrollPane4.setMinimumSize(new java.awt.Dimension(64, 27));
 
@@ -461,13 +461,24 @@ public class GUI extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.gridheight = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel7.add(jScrollPane2, gridBagConstraints);
 
-        jPanel6.setLayout(new java.awt.FlowLayout(1, 4, 4));
+        jPanel6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 4, 4));
+
+        dppPPNCheckBox.setSelected(true);
+        dppPPNCheckBox.setText("DPP + PPN");
+        dppPPNCheckBox.setActionCommand("DPP + PPN");
+        dppPPNCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dppPPNCheckBoxActionPerformed(evt);
+            }
+        });
+        jPanel6.add(dppPPNCheckBox);
 
         indoCommaCheckBox.setText("Indo Comma");
         indoCommaCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -498,7 +509,7 @@ public class GUI extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         jPanel7.add(jPanel6, gridBagConstraints);
 
-        jPanel8.setLayout(new java.awt.FlowLayout(1, 4, 4));
+        jPanel8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 4, 4));
 
         clearFormButton.setText("Clear Form");
         clearFormButton.addActionListener(new java.awt.event.ActionListener() {
@@ -677,6 +688,10 @@ public class GUI extends javax.swing.JFrame {
         pasteField.setText(parser.generate());
     }//GEN-LAST:event_generateExcelButtonActionPerformed
 
+    private void dppPPNCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dppPPNCheckBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dppPPNCheckBoxActionPerformed
+
     
     public void parseDate(){
         parseDate(dateField.getText());
@@ -730,6 +745,7 @@ public class GUI extends javax.swing.JFrame {
     public javax.swing.JTextField dateField;
     private javax.swing.JButton delPrevButton;
     public javax.swing.JTextField dppField;
+    public javax.swing.JCheckBox dppPPNCheckBox;
     private javax.swing.JButton findNPWPButton;
     private javax.swing.JButton findNameButton;
     private javax.swing.JButton generateButton;

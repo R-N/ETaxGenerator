@@ -40,7 +40,12 @@ public class PasteParser{// implements ActionListener {
         //jComp.registerKeyboardAction(this,"Paste",paste,JComponent.WHEN_FOCUSED);
         //system = Toolkit.getDefaultToolkit().getSystemClipboard();
    }
+    
     public void parse(String row){
+        parse(row, false);
+    }
+    
+    public void parse(String row, boolean dppPlusPPN){
         if(Util.isNullOrEmpty(row)){
             Util.showMessage("Text to parse is empty", "Failed");
             return;
@@ -68,7 +73,10 @@ public class PasteParser{// implements ActionListener {
         if(cl > 9) invoiceNo = cols[9+cl1].trim();
         int iPPn = Util.parseInt(ppn);
         int iDPPPlusPPn = Util.parseInt(dppPlusPPn);
-        int iDPP = iDPPPlusPPn - iPPn;
+        int iDPP = iDPPPlusPPn;
+        if (gui.dppPPNCheckBox.isSelected()){
+            iDPP -= iPPn;
+        }
         String dpp = Util.formatNumber(iDPP);
         Counterparty cp = etaxgenerator.counterparty.Database.getInstance().findByName(fullCustomer);
         if (cp == null){
@@ -83,6 +91,7 @@ public class PasteParser{// implements ActionListener {
         gui.invoiceNoField.setText(invoiceNo);
         
         gui.setPPn();
+        gui.ppnField.setText(ppn);
     }
     
     public String generate(){

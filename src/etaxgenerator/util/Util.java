@@ -20,6 +20,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JOptionPane;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.Locale;
 import java.time.LocalDateTime;
 /**
@@ -81,11 +82,40 @@ public class Util {
         }
         return ret;
     }
-    public static long parseLong(String s){
+ 
+    public static Number parseNumber(String s, boolean indoComma) throws ParseException{
         if(s == null){
             return 0;
         }
         s = s.replace(" ", "");
+        if(s.isEmpty() || s.equals("-")){
+            return 0;
+        }
+        DecimalFormat df = dfInt;
+        if(indoComma){
+            df = dfIndoInt;
+        }
+        df.applyPattern("###,##0.0#");
+        return df.parse(s);
+    }
+    
+    public static long parseLong(String s){
+        return parseLong(s, Config.indoComma);
+    }
+    
+    public static long parseLong(String s, boolean indoComma){
+        if(s == null){
+            return 0;
+        }
+        s = s.replace(" ", "");
+        
+        try{
+            Number n = parseNumber(s, indoComma);
+            return n.longValue();
+        }catch(ParseException ex){
+            log(stackTraceString(ex));
+        }
+        
         s = s.replace(",", "").replace(".", "");
         if(s.isEmpty() || s.equals("-")){
             return 0;
@@ -97,8 +127,12 @@ public class Util {
             return 0;
         }
     }
+    
     public static int parseInt(String s){
-        return (int)parseLong(s);
+        return parseInt(s, Config.indoComma);
+    }
+    public static int parseInt(String s, boolean indoComma){
+        return (int)parseLong(s, indoComma);
     }
     public static double parseDouble(String s){
         return parseDouble(s, Config.indoComma);
@@ -107,7 +141,16 @@ public class Util {
         if(s == null){
             return 0;
         }
+        
         s = s.replace(" ", "");
+        
+        try{
+            Number n = parseNumber(s, indoComma);
+            return n.doubleValue();
+        }catch(ParseException ex){
+            log(stackTraceString(ex));
+        }
+        
         if(indoComma){
             s = s.replace(".", "").replace(",", ".");
         }else{
@@ -123,6 +166,7 @@ public class Util {
             return 0;
         }
     }
+    
     
     public static String formatDate(String date){
         return date.replace("-", "/").trim();
