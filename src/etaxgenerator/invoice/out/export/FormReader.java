@@ -30,6 +30,16 @@ public class FormReader {
         return cp;
     }
     public Invoice readInvoice(){
+        double mul = 0;
+        if (form.dppWorkaroundCheckBox.isSelected()){
+            double ppnPercent0 = Util.parseDouble(form.ppnPercentField.getText());
+            double ppnPercent1 = Util.parseDouble(form.ppnPercentField1.getText());
+            mul = ppnPercent0 / ppnPercent1;
+        }
+        return readInvoice(mul);
+        //return readInvoice(form.dppWorkaroundCheckBox.isSelected());
+    }
+    public Invoice readInvoice(double mul){
         boolean indoComma = Config.indoComma;
         Invoice inv = new Invoice(readCounterparty());
         inv.no = form.invoiceNoField.getText().trim();
@@ -40,11 +50,20 @@ public class FormReader {
         if(dl > 0) inv.day = Util.parseInt(date1[0]);
         if(dl > 1) inv.month = Util.parseInt(date1[1]);
         if(dl > 2) inv.year = Util.parseInt(date1[2]);
-        inv.dp = Util.parseDouble(form.dpField.getText().trim(), indoComma);
-        inv.setPPnPercent(Util.parseDouble(form.ppnPercentField.getText().trim()));
-        inv.setTotalPPn(Util.parseDouble(form.ppnField.getText().trim()));
-        inv.setPPnDP(Util.parseDouble(form.ppnDPField.getText().trim()));
         inv.setRetensiPercent(Util.parseDouble(form.retensiPercentField.getText().trim()));
+        
+        boolean dppWorkaround = (mul != 0 && mul != 1);
+        if (dppWorkaround){
+            inv.dp = Util.parseDouble(form.dpField1.getText().trim(), indoComma);
+            inv.setPPnPercent(Util.parseDouble(form.ppnPercentField1.getText().trim()));
+            inv.setTotalPPn(Util.parseDouble(form.ppnField1.getText().trim()));
+            inv.setPPnDP(Util.parseDouble(form.ppnDPField1.getText().trim()));
+        }else{
+            inv.dp = Util.parseDouble(form.dpField.getText().trim(), indoComma);
+            inv.setPPnPercent(Util.parseDouble(form.ppnPercentField.getText().trim()));
+            inv.setTotalPPn(Util.parseDouble(form.ppnField.getText().trim()));
+            inv.setPPnDP(Util.parseDouble(form.ppnDPField.getText().trim()));
+        }
         
         int rowCount = form.itemTable.getRowCount();
         Item prev = null;
@@ -55,6 +74,11 @@ public class FormReader {
                 prev = it;
             }
         }
+        
+        if (dppWorkaround){
+            inv.applyMul(mul);
+        }
+        
         return inv;
     }
     public Item readItem(int index, Item prev){

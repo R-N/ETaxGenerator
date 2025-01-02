@@ -120,6 +120,39 @@ public class Invoice {
         }
     }
     
+    public Invoice copy(){
+        Invoice in = new Invoice(this.counterparty);
+        
+        in.no = this.no;
+        in.rev = this.rev;
+        in.day = this.day;
+        in.month = this.month;
+        in.year = this.year;
+        in.dp = this.dp;
+        in.ppnPercent = this.ppnPercent;
+        in.totalPPn = this.totalPPn;
+        in.ppnDP = this.ppnDP;
+        in.retensiPercent = this.retensiPercent;
+        in.totalRetensi = this.totalRetensi;
+    
+        in.items = new ArrayList<Item>();
+        for (Item i : this.items){
+            in.items.add(i.copy());
+        }
+        return in;
+    }
+    
+    public void applyMul(double mul){
+        for (Item i : items){
+            i.applyMul(mul);
+        }
+        this.dp *= mul;
+        this.totalPPn *= mul;
+        this.ppnDP *= mul;
+        this.totalRetensi *= mul;
+        return;
+    }
+    
     public String build(){
         if (this.totalPPn == 0){
             this.setTotalPPn(this.getTotalPPn());

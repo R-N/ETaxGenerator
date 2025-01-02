@@ -22,6 +22,18 @@ public class Item {
     public double valueDiscount=0;
     public double totalDiscount=0;//total = subtotal-totalDiscount
     
+    public Item copy(){
+        Item it = new Item();
+        it.code = this.code;
+        it.name = this.name;
+        it.price = this.price;
+        it.qty = this.qty;
+        it.percentageDiscount = this.percentageDiscount;
+        it.valueDiscount = this.valueDiscount;
+        it.totalDiscount = this.totalDiscount;
+        return it;
+    }
+    
     public double getSubtotal(){
         return price*qty;
     }
@@ -38,8 +50,11 @@ public class Item {
     public double getRetensi(double percent){
         return getTotal()*percent;
     }
-    public void applyRetensi(double percent){
-        this.price *= 1.0 - percent;
+    public void applyMul(double mul){
+        this.price *= mul;
+    }
+    public void applyRetensi(double mul){
+        applyMul(1.0 - mul);
     }
     public String build(double ppnPercent){
         return String.format(Util.usLocale, "\"OF\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"\n",

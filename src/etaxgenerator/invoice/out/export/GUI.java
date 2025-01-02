@@ -34,11 +34,13 @@ public class GUI extends javax.swing.JFrame {
     Object[] itemTableColumnNames;
 
     boolean ppnCalculated = false;
+    boolean dppWorkaroundCalculated = false;
     double preRetensi = 0;
     
     public static DecimalFormat df = (DecimalFormat)NumberFormat.getNumberInstance(Util.usLocale);
     public static DecimalFormat dfIndo = (DecimalFormat)NumberFormat.getNumberInstance(Util.idLocale);
     public void clearForm(){
+        toggleDPPWorkaroundPanel();
         customerField.setText("");
         npwpField.setText(Util.nullNPWP);
         addressField.setText("");
@@ -55,6 +57,7 @@ public class GUI extends javax.swing.JFrame {
         refreshItemCount();
         preRetensi = 0;
         ppnCalculated = false;
+        dppWorkaroundCalculated = false;
         calculateRetensiButton.setEnabled(true);
         applyRetensiButton.setEnabled(true);
         calculateRetensi();
@@ -124,15 +127,26 @@ public class GUI extends javax.swing.JFrame {
             Util.showError("Item tidak boleh kosong", "Error");
             return false;
         }
+        if (!ppnCalculated){
+            try{
+                calculatePPn();
+            }catch(Exception ex){
+                
+            }
+        }
+        if (dppWorkaroundCheckBox.isSelected() && !dppWorkaroundCalculated){
+            try{
+                calculateDPPWorkaround();
+            }catch(Exception ex){
+                
+            }
+        }
         return true;
     }
     
     public boolean add(){
         if (!check()){
             return false;
-        }
-        if (!ppnCalculated){
-            calculatePPn();
         }
         String sLastInvoiceNo = Util.trim(invoiceNoField.getText());
         Config.setLastInvoiceNo(sLastInvoiceNo);
@@ -177,8 +191,12 @@ public class GUI extends javax.swing.JFrame {
         return in.getTotalTotal();
     }
     
-    public void calculatePPn(){
-        Invoice in = reader.readInvoice();
+    public Invoice calculatePPn(){
+        return calculatePPn(0);
+        //return calculatePPn(dppWorkaroundCheckBox.isSelected());
+    }
+    public Invoice calculatePPn(double mul){
+        Invoice in = reader.readInvoice(mul);
         double dpp = in.getTotalTotal();
         double ppn = in.getTotalPPn();
         double ppnDP = in.getPPnDP();
@@ -186,6 +204,7 @@ public class GUI extends javax.swing.JFrame {
         ppnField.setText(Util.formatInt(ppn));
         ppnDPField.setText(Util.formatInt(ppnDP));
         ppnCalculated = true;
+        return in;
     }
     
     public void calculateRetensi(){
@@ -297,6 +316,23 @@ public class GUI extends javax.swing.JFrame {
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         jLabel22 = new javax.swing.JLabel();
         ppnDPField = new javax.swing.JTextField();
+        jPanel18 = new javax.swing.JPanel();
+        dppWorkaroundCheckBox = new javax.swing.JCheckBox();
+        filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        calculatePPnButton1 = new javax.swing.JButton();
+        dppWorkaroundPanel = new javax.swing.JPanel();
+        jLabel32 = new javax.swing.JLabel();
+        dppField1 = new javax.swing.JTextField();
+        jLabel33 = new javax.swing.JLabel();
+        ppnPercentField1 = new javax.swing.JTextField();
+        jLabel34 = new javax.swing.JLabel();
+        ppnField1 = new javax.swing.JTextField();
+        jLabel35 = new javax.swing.JLabel();
+        dpField1 = new javax.swing.JTextField();
+        jLabel36 = new javax.swing.JLabel();
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        jLabel37 = new javax.swing.JLabel();
+        ppnDPField1 = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -438,8 +474,6 @@ public class GUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         jPanel7.add(jLabel5, gridBagConstraints);
 
-        jScrollPane4.setMinimumSize(null);
-
         addressField.setColumns(20);
         addressField.setLineWrap(true);
         addressField.setRows(1);
@@ -512,7 +546,8 @@ public class GUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(jPanel7, gridBagConstraints);
 
-        jScrollPane3.setMinimumSize(new java.awt.Dimension(64, 64));
+        jScrollPane3.setMinimumSize(new java.awt.Dimension(64, 16));
+        jScrollPane3.setPreferredSize(new java.awt.Dimension(452, 100));
 
         itemTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -530,7 +565,6 @@ public class GUI extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        itemTable.setMinimumSize(new java.awt.Dimension(64, 64));
         jScrollPane3.setViewportView(itemTable);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -869,6 +903,185 @@ public class GUI extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(jPanel15, gridBagConstraints);
 
+        jPanel18.setLayout(new java.awt.GridBagLayout());
+
+        dppWorkaroundCheckBox.setSelected(true);
+        dppWorkaroundCheckBox.setText("DPP 11/12 Workaround");
+        dppWorkaroundCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dppWorkaroundCheckBoxActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(8, 8, 8, 8);
+        jPanel18.add(dppWorkaroundCheckBox, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.weightx = 1.0;
+        jPanel18.add(filler4, gridBagConstraints);
+
+        calculatePPnButton1.setText("Calculate");
+        calculatePPnButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calculatePPnButton1ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        jPanel18.add(calculatePPnButton1, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        getContentPane().add(jPanel18, gridBagConstraints);
+
+        dppWorkaroundPanel.setLayout(new java.awt.GridBagLayout());
+
+        jLabel32.setText("DPP :");
+        jLabel32.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel32.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        dppWorkaroundPanel.add(jLabel32, gridBagConstraints);
+
+        dppField1.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        dppField1.setText("0");
+        dppField1.setToolTipText("");
+        dppField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dppField1ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        dppWorkaroundPanel.add(dppField1, gridBagConstraints);
+
+        jLabel33.setText("PPN");
+        jLabel33.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel33.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        dppWorkaroundPanel.add(jLabel33, gridBagConstraints);
+
+        ppnPercentField1.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        ppnPercentField1.setText("0.12");
+        ppnPercentField1.setToolTipText("");
+        ppnPercentField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppnPercentField1ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        dppWorkaroundPanel.add(ppnPercentField1, gridBagConstraints);
+
+        jLabel34.setText("=");
+        jLabel34.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel34.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        dppWorkaroundPanel.add(jLabel34, gridBagConstraints);
+
+        ppnField1.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        ppnField1.setText("0");
+        ppnField1.setToolTipText("Silahkan ubah penyesuaian ke bilangan bulat");
+        ppnField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppnField1ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        dppWorkaroundPanel.add(ppnField1, gridBagConstraints);
+
+        jLabel35.setText("DP :");
+        jLabel35.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel35.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        dppWorkaroundPanel.add(jLabel35, gridBagConstraints);
+
+        dpField1.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        dpField1.setText("0");
+        dpField1.setToolTipText("");
+        dpField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dpField1ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        dppWorkaroundPanel.add(dpField1, gridBagConstraints);
+
+        jLabel36.setText("PPN");
+        jLabel36.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel36.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        dppWorkaroundPanel.add(jLabel36, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 2;
+        dppWorkaroundPanel.add(filler3, gridBagConstraints);
+
+        jLabel37.setText("=");
+        jLabel37.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel37.setBorder(javax.swing.BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        dppWorkaroundPanel.add(jLabel37, gridBagConstraints);
+
+        ppnDPField1.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        ppnDPField1.setText("0");
+        ppnDPField1.setToolTipText("Silahkan ubah penyesuaian ke bilangan bulat");
+        ppnDPField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppnDPField1ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        dppWorkaroundPanel.add(ppnDPField1, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        getContentPane().add(dppWorkaroundPanel, gridBagConstraints);
+
         jPanel5.setLayout(new java.awt.GridBagLayout());
 
         jLabel2.setText("Paste Excel");
@@ -1154,10 +1367,20 @@ public class GUI extends javax.swing.JFrame {
     private void calculatePPnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculatePPnButtonActionPerformed
         // TODO add your handling code here:
         calculatePPn();
+        if (dppWorkaroundCheckBox.isSelected()){
+            try{
+                calculateDPPWorkaround();
+            }catch (Exception ex){
+                
+            }
+        }
     }//GEN-LAST:event_calculatePPnButtonActionPerformed
 
     private void generateExcelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateExcelButtonActionPerformed
         // TODO add your handling code here:
+        if (!check()){
+            return;
+        }
         pasteField.setText(parser.generate());
     }//GEN-LAST:event_generateExcelButtonActionPerformed
 
@@ -1190,6 +1413,117 @@ public class GUI extends javax.swing.JFrame {
     private void ppnDPFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppnDPFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ppnDPFieldActionPerformed
+
+    void toggleDPPWorkaroundPanel(){
+        boolean enabled = dppWorkaroundCheckBox.isSelected();
+        dppWorkaroundPanel.setVisible(enabled);
+        dppWorkaroundPanel.setEnabled(enabled);
+        if (enabled){
+            try{
+                calculateDPPWorkaround();
+            }catch (Exception ex){
+                
+            }
+        }
+    }
+    
+    private void dppWorkaroundCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dppWorkaroundCheckBoxActionPerformed
+        // TODO add your handling code here:
+        toggleDPPWorkaroundPanel();
+    }//GEN-LAST:event_dppWorkaroundCheckBoxActionPerformed
+
+    private void ppnPercentField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppnPercentField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ppnPercentField1ActionPerformed
+
+    private void ppnField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppnField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ppnField1ActionPerformed
+
+    Invoice calculateDPPWorkaround(){
+        if (!dppWorkaroundCheckBox.isSelected()){
+            return null;
+        }
+        if (!ppnCalculated){
+            calculatePPn(0);
+        }
+        
+        Invoice in0 = reader.readInvoice(0);
+        double ppnPercent0 = in0.ppnPercent;
+        double ppnPercent1 = Util.parseDouble(ppnPercentField1.getText().trim());
+        double mul = ppnPercent0 / ppnPercent1;
+        double dpp0 = in0.getTotalTotal();
+        double dp0 = in0.dp;
+        double ppn0 = in0.getTotalPPn();
+        double ppnDP0 = in0.getPPnDP();
+        
+        double dpp1 = mul * dpp0;
+        double dp1 = mul * dp0;
+        
+        dppField1.setText(Util.formatNumber(dpp1));
+        dpField1.setText(Util.formatNumber(dp1));
+        
+        Invoice in1 = reader.readInvoice(mul);
+        
+        in1.dp = dp1;
+        double ppn1 = in1.getTotalPPn();
+        double ppnDP1 = in1.getPPnDP();
+        
+        in1.setTotalPPn(ppn1);
+        in1.setPPnDP(ppnDP1);
+        
+        ppnField1.setText(Util.formatInt(ppn1));
+        ppnDPField1.setText(Util.formatInt(ppnDP1));
+        
+        boolean err = false;
+        if (dpp1 != 0){
+            if (dpp1 != in1.getTotalTotal()){
+                Util.log("dpp1 not equal getTotalTotal!");
+                err = true;
+            }
+            if (dpp1 == dpp0){
+                Util.log("dpp1 " + String.valueOf(dpp1) + " equal dpp0 " + String.valueOf(dpp0) + "!");
+                err = true;
+            }
+            if (ppn1 != ppn0){
+                Util.log("ppn1 not equal ppn0!");
+                err = true;
+            }
+        }
+        if (dp1 != 0){
+            if (dp1 == dp0){
+                Util.log("dp1 " + String.valueOf(dp1) + " equal dp0 " + String.valueOf(dp0) + "!");
+                err = true;
+            }
+            if (ppnDP1 != ppnDP0){
+                Util.log("ppnDP1 not equal ppnDP0!");
+                err = true;
+            }
+        }
+        if (err){
+            return null;
+        }
+        
+        dppWorkaroundCalculated = true;
+        return in1;
+    }
+    
+    private void calculatePPnButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculatePPnButton1ActionPerformed
+        // TODO add your handling code here:
+        calculateDPPWorkaround();
+    }//GEN-LAST:event_calculatePPnButton1ActionPerformed
+
+    private void dpField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dpField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dpField1ActionPerformed
+
+    private void ppnDPField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppnDPField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ppnDPField1ActionPerformed
+
+    private void dppField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dppField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dppField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1232,6 +1566,7 @@ public class GUI extends javax.swing.JFrame {
     public javax.swing.JTextArea addressField;
     private javax.swing.JButton applyRetensiButton;
     private javax.swing.JButton calculatePPnButton;
+    private javax.swing.JButton calculatePPnButton1;
     private javax.swing.JButton calculateRetensiButton;
     private javax.swing.JButton clearFormButton;
     private javax.swing.JButton clearQueueButton;
@@ -1240,9 +1575,15 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton delPrevButton;
     public javax.swing.JButton deleteRowButton;
     public javax.swing.JTextField dpField;
+    public javax.swing.JTextField dpField1;
+    public javax.swing.JTextField dppField1;
     public javax.swing.JLabel dppLabel;
+    public javax.swing.JCheckBox dppWorkaroundCheckBox;
+    private javax.swing.JPanel dppWorkaroundPanel;
     public javax.swing.JLabel dprLabel;
     private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler3;
+    private javax.swing.Box.Filler filler4;
     private javax.swing.JButton findNPWPButton;
     private javax.swing.JButton findNameButton;
     private javax.swing.JButton generateButton;
@@ -1269,6 +1610,12 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1279,6 +1626,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1299,8 +1647,11 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton parseButton;
     public javax.swing.JTextArea pasteField;
     public javax.swing.JTextField ppnDPField;
+    public javax.swing.JTextField ppnDPField1;
     public javax.swing.JTextField ppnField;
+    public javax.swing.JTextField ppnField1;
     public javax.swing.JTextField ppnPercentField;
+    public javax.swing.JTextField ppnPercentField1;
     private javax.swing.JLabel queueCountLabel;
     public javax.swing.JButton reduceItemCountButton;
     public javax.swing.JLabel retensiLabel;
