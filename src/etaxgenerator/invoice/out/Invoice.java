@@ -82,11 +82,18 @@ public class Invoice {
         }
         return sum;
     }
+    public double getDPP(){
+        double sum = 0;
+        for(Item i : items){
+            sum+=i.getDPP();
+        }
+        return sum;
+    }
     public double getTotalPPn(){
         return getTotalPPn(this.ppnPercent);
     }
     public double getTotalPPn(double ppnPercent){
-        return (int)(ppnPercent * getTotalTotal());
+        return (int)(ppnPercent * getDPP());
     }
     public double getPPnDP(){
         return getPPnDP(this.ppnPercent);
@@ -142,10 +149,17 @@ public class Invoice {
         return in;
     }
     
-    public void applyMul(double mul){
+    public void setDPPMul(double mul){
         for (Item i : items){
-            i.applyMul(mul);
+            i.dppMul = mul;
         }
+    }
+    
+    public void applyMul(double mul){
+//        for (Item i : items){
+//            i.applyMul(mul);
+//        }
+        setDPPMul(mul);
         this.dp *= mul;
         this.totalPPn *= mul;
         this.ppnDP *= mul;
@@ -170,7 +184,7 @@ public class Invoice {
                 counterparty.getNumberNPWP(),
                 Util.escape(counterparty.getCapsName()),
                 Util.escape(counterparty.getFullAddress()),
-                getTotalTotal(),
+                getDPP(),
                 this.totalPPn,
                 0.0,
                 "0",

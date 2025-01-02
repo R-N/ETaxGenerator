@@ -182,22 +182,14 @@ public class GUI extends javax.swing.JFrame {
     public void refreshItemCount(){
         itemCountField.setText(String.valueOf(itemTable.getRowCount()));
     }
-    
-    public double getTotal(){
-        return getTotal(reader.readInvoice());
-    }
-    
-    public double getTotal(Invoice in){
-        return in.getTotalTotal();
-    }
-    
+
     public Invoice calculatePPn(){
         return calculatePPn(0);
         //return calculatePPn(dppWorkaroundCheckBox.isSelected());
     }
     public Invoice calculatePPn(double mul){
         Invoice in = reader.readInvoice(mul);
-        double dpp = in.getTotalTotal();
+        double dpp = in.getDPP();
         double ppn = in.getTotalPPn();
         double ppnDP = in.getPPnDP();
         dppLabel.setText(Util.formatNumber(dpp));
@@ -1452,7 +1444,7 @@ public class GUI extends javax.swing.JFrame {
         double ppnPercent0 = in0.ppnPercent;
         double ppnPercent1 = Util.parseDouble(ppnPercentField1.getText().trim());
         double mul = ppnPercent0 / ppnPercent1;
-        double dpp0 = in0.getTotalTotal();
+        double dpp0 = in0.getDPP();
         double dp0 = in0.dp;
         double ppn0 = in0.getTotalPPn();
         double ppnDP0 = in0.getPPnDP();
@@ -1477,8 +1469,8 @@ public class GUI extends javax.swing.JFrame {
         
         boolean err = false;
         if (dpp1 != 0){
-            if (dpp1 != in1.getTotalTotal()){
-                Util.log("dpp1 not equal getTotalTotal!");
+            if (dpp1 != in1.getDPP()){
+                Util.log("dpp1 not equal getDPP!");
                 err = true;
             }
             if (dpp1 == dpp0){

@@ -22,6 +22,8 @@ public class Item {
     public double valueDiscount=0;
     public double totalDiscount=0;//total = subtotal-totalDiscount
     
+    public double dppMul = 1;
+    
     public Item copy(){
         Item it = new Item();
         it.code = this.code;
@@ -44,6 +46,9 @@ public class Item {
     public double getTotal(){
         return getSubtotal() - getTotalDiscount();
     }
+    public double getDPP(){
+        return dppMul * getTotal();
+    }
     public double getPPn(double percent){
         return getTotal()*percent;
     }
@@ -64,7 +69,7 @@ public class Item {
                 Util.formatDouble(qty),
                 Util.formatDouble(getSubtotal()),
                 Util.formatDouble(getTotalDiscount()),
-                Util.formatDouble(getTotal()),
+                Util.formatDouble(getDPP()),
                 Util.formatDouble(getPPn(ppnPercent)),
                 "0",
                 Util.formatDouble(0.0)
