@@ -191,6 +191,8 @@ public class GUI extends javax.swing.JFrame {
         pasteField = new javax.swing.JTextArea();
         jPanel6 = new javax.swing.JPanel();
         dppPPNCheckBox = new javax.swing.JCheckBox();
+        dppWorkaroundCheckBox = new javax.swing.JCheckBox();
+        ppnPercentField0 = new javax.swing.JTextField();
         indoCommaCheckBox = new javax.swing.JCheckBox();
         parseButton = new javax.swing.JButton();
         generateExcelButton = new javax.swing.JButton();
@@ -209,7 +211,6 @@ public class GUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Faktur Masukan - ETaxGenerator");
-        setPreferredSize(new java.awt.Dimension(480, 600));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jSeparator2.setMaximumSize(new java.awt.Dimension(32767, 10));
@@ -414,7 +415,8 @@ public class GUI extends javax.swing.JFrame {
         jPanel4.setLayout(new java.awt.GridBagLayout());
 
         ppnPercentField.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        ppnPercentField.setText("0.11");
+        ppnPercentField.setText("0.12");
+        ppnPercentField.setToolTipText("");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
@@ -472,13 +474,26 @@ public class GUI extends javax.swing.JFrame {
 
         dppPPNCheckBox.setSelected(true);
         dppPPNCheckBox.setText("DPP + PPN");
-        dppPPNCheckBox.setActionCommand("DPP + PPN");
         dppPPNCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dppPPNCheckBoxActionPerformed(evt);
             }
         });
         jPanel6.add(dppPPNCheckBox);
+
+        dppWorkaroundCheckBox.setSelected(true);
+        dppWorkaroundCheckBox.setText("DPP Workaround");
+        dppWorkaroundCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dppWorkaroundCheckBoxActionPerformed(evt);
+            }
+        });
+        jPanel6.add(dppWorkaroundCheckBox);
+
+        ppnPercentField0.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        ppnPercentField0.setText("0.11");
+        ppnPercentField0.setToolTipText("");
+        jPanel6.add(ppnPercentField0);
 
         indoCommaCheckBox.setText("Indo Comma");
         indoCommaCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -692,6 +707,10 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_dppPPNCheckBoxActionPerformed
 
+    private void dppWorkaroundCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dppWorkaroundCheckBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dppWorkaroundCheckBoxActionPerformed
+
     
     public void parseDate(){
         parseDate(dateField.getText());
@@ -746,6 +765,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton delPrevButton;
     public javax.swing.JTextField dppField;
     public javax.swing.JCheckBox dppPPNCheckBox;
+    public javax.swing.JCheckBox dppWorkaroundCheckBox;
     private javax.swing.JButton findNPWPButton;
     private javax.swing.JButton findNameButton;
     private javax.swing.JButton generateButton;
@@ -780,7 +800,8 @@ public class GUI extends javax.swing.JFrame {
     public javax.swing.JTextArea pasteField;
     public javax.swing.JTextField periodField;
     public javax.swing.JTextField ppnField;
-    private javax.swing.JTextField ppnPercentField;
+    public javax.swing.JTextField ppnPercentField;
+    public javax.swing.JTextField ppnPercentField0;
     private javax.swing.JLabel queueCountLabel;
     public javax.swing.JTextField yearField;
     // End of variables declaration//GEN-END:variables

@@ -77,6 +77,12 @@ public class PasteParser{// implements ActionListener {
         if (gui.dppPPNCheckBox.isSelected()){
             iDPP -= iPPn;
         }
+        if (gui.dppWorkaroundCheckBox.isSelected()){
+            double ppnPercent0 = Util.parseDouble(gui.ppnPercentField0.getText());
+            double ppnPercent1 = Util.parseDouble(gui.ppnPercentField.getText());
+            double mul = ppnPercent0 / ppnPercent1;
+            iDPP *= mul;
+        }
         String dpp = Util.formatNumber(iDPP);
         Counterparty cp = etaxgenerator.counterparty.Database.getInstance().findByName(fullCustomer);
         if (cp == null){
