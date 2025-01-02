@@ -9,6 +9,8 @@ import etaxgenerator.util.Util;
 import etaxgenerator.util.Config;
 import etaxgenerator.counterparty.Counterparty;
 import etaxgenerator.invoice.in.Invoice;
+import java.time.LocalDate;
+
 
 /**
  *
@@ -90,10 +92,19 @@ public class GUI extends javax.swing.JFrame {
         }else{
             int period = Util.parseInt(periodField.getText());
             int year = Util.parseInt(yearField.getText());
-            diff = (year-date[2])*12 + period-date[1];
-            if (diff < 0 || diff > 3){
+            int dateDiff = (year-date[2])*12 + period-date[1];
+            if (dateDiff < 0 || dateDiff > 3){
                 Util.showError("Faktur hanya bisa masuk SPT bulan pembuatannya atau maksimal bulan ketiga setelahnya", "Error");
                 return false;
+            }
+            LocalDate currentDate = LocalDate.now();
+            int currentYear = currentDate.getYear();
+            int currentMonth = currentDate.getMonthValue();
+            int dateDiff2 = (year-currentYear)*12 + period-currentMonth;
+            if (dateDiff2 < -1){
+                if (!Util.askConfirmation("Periode PPN masukan lebih dari satu bulan lalu. Jika periode tersebut telah dilaporkan, anda harus membuat laporan pembetulan. Lanjutkan?", "Konfirmasi")){
+                    return false;
+                }
             }
         }
         return true;
